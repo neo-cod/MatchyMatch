@@ -1,0 +1,181 @@
+ID,DIFFICULTY,TYPE,EN,TR,FR,IT,HU,AR_SCRIPT,AR_LATIN
+1,EASY,WORD,Hello,Merhaba,Salut,Ciao,Szia,مرحبا,Marhaba
+2,EASY,WORD,Water,Su,Eau,Acqua,Víz,ماء,Maa
+3,EASY,WORD,Bread,Ekmek,Pain,Pane,Kenyér,خبز,Khubz
+4,EASY,WORD,Book,Kitap,Livre,Libro,Könyv,كتاب,Kitab
+5,EASY,WORD,House,Ev,Maison,Casa,Ház,بيت,Bayt
+6,EASY,WORD,Sun,Güneş,Soleil,Sole,Nap,شمس,Shams
+7,EASY,WORD,Moon,Ay,Lune,Luna,Hold,قمر,Qamar
+8,EASY,WORD,Tree,Ağaç,Arbre,Albero,Fa,شجرة,Shajara
+9,EASY,WORD,Cat,Kedi,Chat,Gatto,Macska,قطة,Qitta
+10,EASY,WORD,Dog,Köpek,Chien,Cane,Kutya,كلب,Kalb
+11,EASY,WORD,Friend,Arkadaş,Ami,Amico,Barát,صديق,Sadiq
+12,EASY,WORD,School,Okul,École,Scuola,Iskola,مدرسة,Madrasa
+13,EASY,WORD,Apple,Elma,Pomme,Mela,Alma,تفاحة,Tuffaha
+14,EASY,WORD,Milk,Süt,Lait,Latte,Tej,حليب,Halib
+15,EASY,WORD,Car,Araba,Voiture,Auto,Autó,سيارة,Sayyara
+16,EASY,WORD,Door,Kapı,Porte,Porta,Ajtó,باب,Bab
+17,EASY,WORD,Window,Pencere,Fenêtre,Finestra,Ablak,نافذة,Nafidha
+18,EASY,WORD,Chair,Sandalye,Chaise,Sedia,Szék,كرسي,Kursi
+19,EASY,WORD,Desk,Çalışma masası,Bureau,Scrivania,Íróasztal,مكتب,Maktab
+20,EASY,WORD,Mother,Anne,Mère,Madre,Anya,أم,Umm
+21,EASY,WORD,Father,Baba,Père,Padre,Apa,أب,Ab
+22,EASY,WORD,Night,Gece,Nuit,Notte,Éjszaka,ليل,Layl
+23,EASY,WORD,Morning,Sabah,Matin,Mattina,Reggel,صباح,Subh
+24,EASY,WORD,City,Şehir,Ville,Città,Város,مدينة,Madina
+25,EASY,WORD,Sea,Deniz,Mer,Mare,Tenger,بحر,Bahr
+26,EASY,WORD,Star,Yıldız,Étoile,Stella,Csillag,نجمة,Najma
+27,EASY,WORD,Rain,Yağmur,Pluie,Pioggia,Eső,مطر,Matar
+28,EASY,WORD,Snow,Kar,Neige,Neve,Hó,ثلج,Thalj
+29,EASY,WORD,Bird,Kuş,Oiseau,Uccello,Madár,طائر,Tair
+30,EASY,WORD,Fish,Balık,Poisson,Pesce,Hal,سمك,Samak
+31,EASY,WORD,Flower,Çiçek,Fleur,Fiore,Virág,زهرة,Zahra
+32,EASY,WORD,Child,Çocuk,Enfant,Bambino,Gyermek,طفل,Tifl
+33,EASY,WORD,Hand,El,Main,Mano,Kéz,يد,Yad
+34,EASY,WORD,Eye,Göz,Œil,Occhio,Szem,عين,Ayn
+35,EASY,WORD,Heart,Kalp,Cœur,Cuore,Szív,قلب,Qalb
+36,EASY,PHRASE,Thank you,Teşekkür ederim,Merci,Grazie,Köszönöm,شكرا لك,Shukran lak
+37,EASY,PHRASE,Good morning,Günaydın,Bonjour,Buongiorno,Jó reggelt,صباح الخير,Sabah al-khayr
+38,EASY,PHRASE,Good night,İyi geceler,Bonne nuit,Buonanotte,Jó éjszakát,تصبح على خير,Tusbih ala khayr
+39,EASY,PHRASE,How are you?,Nasılsın?,Comment ça va?,Come stai?,Hogy vagy?,كيف حالك؟,Kayfa haluk?
+40,EASY,PHRASE,See you later,Sonra görüşürüz,À plus tard,A dopo,Viszlát később,أراك لاحقا,Araka lahiqan
+41,EASY,PHRASE,My name is...,Benim adım...,Je m'appelle...,Mi chiamo...,A nevem...,اسمي...,Ismi...
+42,EASY,PHRASE,Good evening,İyi akşamlar,Bonsoir,Buonasera,Jó estét,مساء الخير,Masaa al-khayr
+43,EASY,PHRASE,Welcome,Hoş geldiniz,Bienvenue,Benvenuto,Üdvözlöm,أهلا وسهلا,Ahlan wa sahlan
+44,EASY,PHRASE,Please,Lütfen,S'il vous plaît,Per favore,Kérem,من فضلك,Min fadlik
+45,EASY,PHRASE,Excuse me,Affedersiniz,Excusez-moi,Mi scusi,Elnézést,عفوا,Afwan
+46,EASY,PHRASE,I am sorry,Özür dilerim,Je suis désolé,Mi dispiace,Sajnálom,أنا آسف,Ana asif
+47,EASY,PHRASE,Yes of course,Evet elbette,Oui bien sûr,Sì certo,Igen természetesen,نعم بالطبع,Naam biltab
+48,EASY,PHRASE,No thank you,Hayır teşekkürler,Non merci,No grazie,Nem köszönöm,لا شكرا,La shukran
+49,EASY,PHRASE,I am fine,İyiyim,Je vais bien,Sto bene,Jól vagyok,أنا بخير,Ana bikhayr
+50,EASY,PHRASE,What is this?,Bu nedir?,Qu'est-ce que c'est?,Che cos'è questo?,Mi ez?,ما هذا؟,Ma hadha?
+51,EASY,PHRASE,Where are you?,Neredesin?,Où es-tu?,Dove sei?,Hol vagy?,أين أنت؟,Ayna anta?
+52,EASY,PHRASE,Have a nice day,İyi günler,Bonne journée,Buona giornata,Szép napot,يوم سعيد,Yawm said
+53,EASY,PHRASE,Good luck,İyi şanslar,Bonne chance,Buona fortuna,Sok szerencsét,حظا سعيدا,Hazzan saidan
+54,EASY,PHRASE,Happy birthday,Doğum günün kutlu olsun,Joyeux anniversaire,Buon compleanno,Boldog születésnapot,عيد ميلاد سعيد,Eid milad said
+55,EASY,PHRASE,Congratulations,Tebrikler,Félicitations,Congratulazioni,Gratulálok,مبروك,Mabruk
+56,EASY,PHRASE,I love you,Seni seviyorum,Je t'aime,Ti amo,Szeretlek,أحبك,Uhibbuk
+57,EASY,PHRASE,Let us go,Hadi gidelim,Allons-y,Andiamo,Menjünk,هيا بنا,Hayya bina
+58,EASY,PHRASE,Wait a minute,Bir dakika bekle,Attends une minute,Aspetta un minuto,Várj egy percet,انتظر دقيقة,Intazir daqiqa
+59,EASY,PHRASE,Come here,Buraya gel,Viens ici,Vieni qui,Gyere ide,تعال إلى هنا,Taal ila huna
+60,EASY,PHRASE,See you tomorrow,Yarın görüşürüz,À demain,A domani,Holnap találkozunk,أراك غدا,Araka ghadan
+61,MEDIUM,WORD,Journey,Yolculuk,Voyage,Viaggio,Utazás,رحلة,Rihla
+62,MEDIUM,WORD,Knowledge,Bilgi,Connaissance,Conoscenza,Tudás,معرفة,Marifa
+63,MEDIUM,WORD,Freedom,Özgürlük,Liberté,Libertà,Szabadság,حرية,Hurriyya
+64,MEDIUM,WORD,Bridge,Köprü,Pont,Ponte,Híd,جسر,Jisr
+65,MEDIUM,WORD,Mountain,Dağ,Montagne,Montagna,Hegy,جبل,Jabal
+66,MEDIUM,WORD,River,Nehir,Rivière,Fiume,Folyó,نهر,Nahr
+67,MEDIUM,WORD,Weather,Hava durumu,Météo,Meteo,Időjárás,طقس,Taqs
+68,MEDIUM,WORD,Library,Kütüphane,Bibliothèque,Biblioteca,Könyvtár,مكتبة,Maktaba
+69,MEDIUM,WORD,Hospital,Hastane,Hôpital,Ospedale,Kórház,مستشفى,Mustashfa
+70,MEDIUM,WORD,Airport,Havalimanı,Aéroport,Aeroporto,Repülőtér,مطار,Al-Matar
+71,MEDIUM,WORD,Success,Başarı,Succès,Successo,Siker,نجاح,Najah
+72,MEDIUM,WORD,Bravery,Cesaret,Bravoure,Coraggio,Bátorság,شجاعة,Shajaa
+73,MEDIUM,WORD,Promise,Söz,Promesse,Promessa,Ígéret,وعد,Waad
+74,MEDIUM,WORD,Memory,Hafıza,Mémoire,Memoria,Emlék,ذاكرة,Dhakira
+75,MEDIUM,WORD,Health,Sağlık,Santé,Salute,Egészség,صحة,Sihha
+76,MEDIUM,WORD,Future,Gelecek,Avenir,Futuro,Jövő,مستقبل,Mustaqbal
+77,MEDIUM,WORD,Valley,Vadi,Vallée,Valle,Völgy,وادي,Wadi
+78,MEDIUM,WORD,Research,Araştırma,Recherche,Ricerca,Kutatás,بحث,Bahth
+79,MEDIUM,WORD,Language,Dil,Langue,Lingua,Nyelv,لغة,Lugha
+80,MEDIUM,WORD,History,Tarih,Histoire,Storia,Történelem,تاريخ,Tarikh
+81,MEDIUM,WORD,Market,Pazar,Marché,Mercato,Piac,سوق,Suq
+82,MEDIUM,WORD,Ticket,Bilet,Billet,Biglietto,Jegy,تذكرة,Tadhkira
+83,MEDIUM,WORD,Key,Anahtar,Clé,Chiave,Kulcs,مفتاح,Miftah
+84,MEDIUM,WORD,Mirror,Ayna,Miroir,Specchio,Tükör,مرآة,Mirat
+85,MEDIUM,WORD,Island,Ada,Île,Isola,Sziget,جزيرة,Jazira
+86,MEDIUM,WORD,Forest,Orman,Forêt,Foresta,Erdő,غابة,Ghaba
+87,MEDIUM,WORD,Desert,Çöl,Désert,Deserto,Sivatag,صحراء,Sahra
+88,MEDIUM,WORD,Painting,Tablo,Peinture,Pittura,Festmény,لوحة,Lawha
+89,MEDIUM,WORD,Music,Müzik,Musique,Musica,Zene,موسيقى,Musiqa
+90,MEDIUM,WORD,Garden,Bahçe,Jardin,Giardino,Kert,حديقة,Hadiqa
+91,MEDIUM,WORD,Kitchen,Mutfak,Cuisine,Cucina,Konyha,مطبخ,Matbakh
+92,MEDIUM,WORD,Suitcase,Bavul,Valise,Valigia,Bőrönd,حقيبة سفر,Haqibat safar
+93,MEDIUM,WORD,Passport,Pasaport,Passeport,Passaporto,Útlevél,جواز سفر,Jawaz safar
+94,MEDIUM,WORD,Neighbor,Komşu,Voisin,Vicino,Szomszéd,جار,Jar
+95,MEDIUM,WORD,Gift,Hediye,Cadeau,Regalo,Ajándék,هدية,Hadiyya
+96,MEDIUM,PHRASE,Where is the station?,İstasyon nerede?,Où est la gare?,Dov'è la stazione?,Hol van az állomás?,أين المحطة؟,Ayna al-mahatta?
+97,MEDIUM,PHRASE,How much does this cost?,Bunun fiyatı ne kadar?,Combien ça coûte?,Quanto costa questo?,Mennyibe kerül ez?,كم سعر هذا؟,Kam sir hadha?
+98,MEDIUM,PHRASE,I would like coffee,Kahve istiyorum,Je voudrais un café,Vorrei un caffè,Kávét szeretnék,أريد قهوة,Uridu qahwa
+99,MEDIUM,PHRASE,Can you help me?,Bana yardım edebilir misin?,Pouvez-vous m'aider?,Puoi aiutarmi?,Tudnál segíteni?,هل يمكنك مساعدتي؟,Hal yumkinuka musaadati?
+100,MEDIUM,PHRASE,Nice to meet you,Tanıştığımıza memnun oldum,Enchanté de vous connaître,Piacere di conoscerti,Örülök hogy találkoztunk,تشرفنا بمعرفتك,Tasharrafna bimarifatik
+101,MEDIUM,PHRASE,Have a safe trip,İyi yolculuklar,Bon voyage,Buon viaggio,Jó utat,رحلة سعيدة,Rihla saida
+102,MEDIUM,PHRASE,Do you speak English?,İngilizce konuşuyor musun?,Parlez-vous anglais?,Parli inglese?,Beszélsz angolul?,هل تتحدث الإنجليزية؟,Hal tatahadath al-injiliziyya?
+103,MEDIUM,PHRASE,I do not understand,Anlamıyorum,Je ne comprends pas,Non capisco,Nem értem,لا أفهم,La afham
+104,MEDIUM,PHRASE,Could you repeat that?,Tekrar eder misiniz?,Pouvez-vous répéter?,Puoi ripetere?,Megismételnéd?,هل يمكنك الإعادة؟,Hal yumkinuka al-iada?
+105,MEDIUM,PHRASE,What time is it?,Saat kaç?,Quelle heure est-il?,Che ore sono?,Hány óra van?,كم الساعة؟,Kam al-saa?
+106,MEDIUM,PHRASE,I am looking for a hotel,Bir otel arıyorum,Je cherche un hôtel,Cerco un albergo,Szállodát keresek,أبحث عن فندق,Abhathu an funduq
+107,MEDIUM,PHRASE,The bill please,Hesap lütfen,L'addition s'il vous plaît,Il conto per favore,A számlát kérem,الفاتورة من فضلك,Al-fatura min fadlik
+108,MEDIUM,PHRASE,Where is the airport?,Havalimanı nerede?,Où est l'aéroport?,Dov'è l'aeroporto?,Hol van a repülőtér?,أين المطار؟,Ayna al-matar?
+109,MEDIUM,PHRASE,I need a doctor,Doktora ihtiyacım var,J'ai besoin d'un médecin,Ho bisogno di un medico,Orvosra van szükségem,أحتاج إلى طبيب,Ahtaju ila tabib
+110,MEDIUM,PHRASE,It is very delicious,Çok lezzetli,C'est très délicieux,È molto delizioso,Nagyon finom,إنه لذيذ جدا,Innahu ladhidh jiddan
+111,MEDIUM,PHRASE,What is the weather like?,Hava nasıl?,Quel temps fait-il?,Com'è il tempo?,Milyen az idő?,كيف حال الطقس؟,Kayfa hal al-taqs?
+112,MEDIUM,PHRASE,I lost my keys,Anahtarlarımı kaybettim,J'ai perdu mes clés,Ho perso le chiavi,Elvesztettem a kulcsomat,أضعت مفاتيحي,Adatu mafatihi
+113,MEDIUM,PHRASE,Call me tonight,Bu akşam beni ara,Appelle-moi ce soir,Chiamami stasera,Hívj fel ma este,اتصل بي الليلة,Ittasil bi al-layla
+114,MEDIUM,PHRASE,Turn left here,Buradan sola dön,Tournez à gauche ici,Gira a sinistra qui,Fordulj balra itt,انعطف يسارا هنا,Inatif yasaran huna
+115,MEDIUM,PHRASE,Go straight ahead,Düz devam et,Allez tout droit,Vai sempre dritto,Menj egyenesen tovább,اذهب مباشرة,Idhhab mubasharatan
+116,MEDIUM,PHRASE,I agree with you,Sana katılıyorum,Je suis d'accord avec toi,Sono d'accordo con te,Egyetértek veled,أتفق معك,Attafiqu maak
+117,MEDIUM,PHRASE,Take care of yourself,Kendine iyi bak,Prends soin de toi,Prenditi cura di te,Vigyázz magadra,اعتن بنفسك,Itani binafsik
+118,MEDIUM,PHRASE,May I ask a question?,Bir soru sorabilir miyim?,Puis-je poser une question?,Posso fare una domanda?,Feltehetek egy kérdést?,هل لي بسؤال؟,Hal li bisual?
+119,MEDIUM,PHRASE,I am running late,Geç kalıyorum,Je suis en retard,Sono in ritardo,Késésben vagyok,أنا متأخر,Ana mutaakhir
+120,MEDIUM,PHRASE,Enjoy your meal,Afiyet olsun,Bon appétit,Buon appetito,Jó étvágyat,شهية طيبة,Shahiyya tayyiba
+121,HARD,WORD,Perseverance,Azim,Persévérance,Perseveranza,Kitartás,مثابرة,Muthabara
+122,HARD,WORD,Consciousness,Bilinç,Conscience,Coscienza,Tudatosság,وعي,Wayi
+123,HARD,WORD,Responsibility,Sorumluluk,Responsabilité,Responsabilità,Felelősség,مسؤولية,Masuliyya
+124,HARD,WORD,Creativity,Yaratıcılık,Créativité,Creatività,Kreativitás,إبداع,Ibdaa
+125,HARD,WORD,Opportunity,Fırsat,Opportunité,Opportunità,Lehetőség,فرصة,Fursa
+126,HARD,WORD,Environment,Çevre,Environnement,Ambiente,Környezet,بيئة,Bia
+127,HARD,WORD,Achievement,Başarım,Accomplissement,Realizzazione,Teljesítmény,إنجاز,Injaz
+128,HARD,WORD,Consequence,Sonuç,Conséquence,Conseguenza,Következmény,نتيجة,Natija
+129,HARD,WORD,Curiosity,Merak,Curiosité,Curiosità,Kíváncsiság,فضول,Fudul
+130,HARD,WORD,Generosity,Cömertlik,Générosité,Generosità,Nagylelkűség,كرم,Karam
+131,HARD,WORD,Wisdom,Bilgelik,Sagesse,Saggezza,Bölcsesség,حكمة,Hikma
+132,HARD,WORD,Forgiveness,Affetme,Pardon,Perdono,Megbocsátás,تسامح,Tasamuh
+133,HARD,WORD,Fairness,Adalet,Équité,Giustizia,Igazságosság,عدالة,Adala
+134,HARD,WORD,Harmony,Uyum,Harmonie,Armonia,Harmónia,انسجام,Insijam
+135,HARD,WORD,Thankfulness,Minnettarlık,Reconnaissance,Gratitudine,Hála,امتنان,Imtinan
+136,HARD,WORD,Independence,Bağımsızlık,Indépendance,Indipendenza,Függetlenség,استقلال,Istiqlal
+137,HARD,WORD,Philosophy,Felsefe,Philosophie,Filosofia,Filozófia,فلسفة,Falsafa
+138,HARD,WORD,Engineering,Mühendislik,Ingénierie,Ingegneria,Mérnöki tudomány,هندسة,Handasa
+139,HARD,WORD,Kindness,Şefkat,Bienveillance,Gentilezza,Kedvesség,تعاطف,Taatuf
+140,HARD,WORD,Determination,Kararlılık,Détermination,Determinazione,Elszántság,عزيمة,Azima
+141,HARD,WORD,Discovery,Keşif,Découverte,Scoperta,Felfedezés,اكتشاف,Iktishaf
+142,HARD,WORD,Enlightenment,Aydınlanma,Illumination,Illuminazione,Megvilágosodás,تنوير,Tanwir
+143,HARD,WORD,Negotiation,Müzakere,Négociation,Negoziazione,Tárgyalás,تفاوض,Tafawud
+144,HARD,WORD,Prosperity,Refah,Prospérité,Prosperità,Jólét,ازدهار,Izdihar
+145,HARD,WORD,Authenticity,Özgünlük,Authenticité,Autenticità,Hitelesség,أصالة,Asala
+146,HARD,WORD,Resilience,Dayanıklılık,Résilience,Resilienza,Rugalmasság,مرونة,Muruna
+147,HARD,WORD,Eloquence,Belagat,Éloquence,Eloquenza,Ékesszólás,فصاحة,Fasaha
+148,HARD,WORD,Altruism,Fedakarlık,Altruisme,Altruismo,Önzetlenség,إيثار,Ithar
+149,HARD,WORD,Serendipity,Mutlu tesadüf,Sérendipité,Serendipità,Szerencsés véletlen,صدفة سعيدة,Sudfa saida
+150,HARD,WORD,Meditation,Tefekkür,Méditation,Meditazione,Szemlélődés,تأمل,Taammul
+151,HARD,WORD,Foresight,Öngörü,Clairvoyance,Lungimiranza,Előrelátás,بصيرة,Basira
+152,HARD,WORD,Integrity,Dürüstlük,Intégrité,Integrità,Feddhetetlenség,نزاهة,Nazaha
+153,HARD,WORD,Empathy,Empati,Empathie,Empatia,Empátia,تقمص عاطفي,Taqammus atifi
+154,HARD,WORD,Equilibrium,Denge,Équilibre,Equilibrio,Egyensúly,توازن,Tawazun
+155,HARD,WORD,Sovereignty,Egemenlik,Souveraineté,Sovranità,Szuverenitás,سيادة,Siyada
+156,HARD,PHRASE,Actions speak louder,Eylemler sözlerden güçlüdür,Les actes valent mieux,I fatti contano più,A tettek hangosabbak,الأفعال أبلغ من الأقوال,Al-afaal ablagh min al-aqwal
+157,HARD,PHRASE,Knowledge is power,Bilgi güçtür,Le savoir est le pouvoir,La conoscenza è potere,A tudás hatalom,المعرفة قوة,Al-marifa quwwa
+158,HARD,PHRASE,Time heals all wounds,Zaman her şeyin ilacıdır,Le temps guérit tout,Il tempo guarisce tutto,Az idő minden sebet begyógyít,الوقت يشفي الجراح,Al-waqt yashfi al-jirah
+159,HARD,PHRASE,Better late than never,Geç olsun güç olmasın,Mieux vaut tard que jamais,Meglio tardi che mai,Jobb későn mint soha,أن تصل متأخرا خير,An tasila mutaakhiran khayr
+160,HARD,PHRASE,Practice makes perfect,Pratik mükemmelleştirir,C'est en forgeant,La pratica rende perfetti,Gyakorlat teszi a mestert,الممارسة تصنع الإتقان,Al-mumarasa tasnau al-itqan
+161,HARD,PHRASE,Every cloud has a silver lining,Her şerde bir hayır vardır,Après la pluie le beau temps,Ogni male non vien per nuocere,Minden rosszban van valami jó,رب ضارة نافعة,Rubba darratin nafia
+162,HARD,PHRASE,Fortune favors the bold,Şans cesurlardan yanadır,La fortune sourit aux audacieux,La fortuna aiuta gli audaci,Bátraké a szerencse,الحظ يحالف الشجعان,Al-hazz yuhalif al-shujan
+163,HARD,PHRASE,Honesty is the best policy,Dürüstlük en iyi politikadır,L'honnêteté est la meilleure politique,L'onestà è la miglior politica,Az őszinteség a legjobb út,الصدق منجاة,Al-sidq manjat
+164,HARD,PHRASE,Where there is a will,Azmin elinden bir şey kurtulmaz,Vouloir c'est pouvoir,Volere è potere,Ahol akarat van ott út is van,حيثما توجد الإرادة,Haythuma tujad al-irada
+165,HARD,PHRASE,Don't judge a book by its cover,Dış görünüşe aldanma,L'habit ne fait pas le moine,L'abito non fa il monaco,Ne ítélj külső alapján,لا تحكم بالمظاهر,La tahkum bil-mazahir
+166,HARD,PHRASE,A blessing in disguise,Görünmez bir nimet,Un mal pour un bien,Una fortuna nella sfortuna,Áldás álruhában,نعمة في طيات محنة,Nima fi tayyat mihna
+167,HARD,PHRASE,Once in a blue moon,Kırk yılda bir,Tous les trente-six du mois,Ogni morte di papa,Nagyon ritkán,في النادر جدا,Fi al-nadir jiddan
+168,HARD,PHRASE,Break the ice,Buzları eritmek,Briser la glace,Rompere il ghiaccio,Megtörni a jeget,كسر الحاجز,Kasr al-hajiz
+169,HARD,PHRASE,Patience is bitter but its fruit is sweet,Sabır acıdır ama meyvesi tatlıdır,La patience est amère,La pazienza è amara,A türelem rózsát terem,الصبر مفتاح الفرج,Al-sabr miftah al-faraj
+170,HARD,PHRASE,Look before you leap,Boğaz dokuz boğumdur,Réfléchir avant d'agir,Guarda prima di saltare,Előbb gondolkodj aztán cselekedj,فكر قبل أن تقدم,Fakkir qabla an tuqdim
+171,HARD,PHRASE,Silence is golden,Sükut altındır,Le silence est d'or,Il silenzio è d'oro,Hallgatni arany,الصمت ذهب,Al-samt dhahab
+172,HARD,PHRASE,Strike while the iron is hot,Demir tavında dövülür,Battre le fer tant qu'il est chaud,Batti il ferro finché è caldo,Addig üsd a vasat amíg meleg,اطرق الحديد وهو ساخن,Itriq al-hadid wa huwa sakhin
+173,HARD,PHRASE,No pain no gain,Emek olmadan yemek olmaz,On n'a rien sans rien,Chi non risica non rosica,Munka nélkül nincs eredmény,لا حلاوة بدون تعب,La halawa bidun taab
+174,HARD,PHRASE,All that glitters is not gold,Her parlayan altın değildir,Tout ce qui brille n'est pas or,Non è tutto oro quel che luccica,Nem mind arany ami fénylik,ليس كل ما يلمع ذهبا,Laysa kull ma yalma dhahaban
+175,HARD,PHRASE,Rome was not built in a day,Roma bir günde kurulmadı,Rome ne s'est pas faite en un jour,Roma non fu costruita in un giorno,Róma sem egy nap alatt épült,لم تبن روما في يوم,Lam tubna Ruma fi yawm
+176,HARD,PHRASE,Unity is strength,Birlikten kuvvet doğar,L'union fait la force,L'unione fa la forza,Egységben az erő,الاتحاد قوة,Al-ittihad quwwa
+177,HARD,PHRASE,Necessity is the mother of invention,İhtiyaç icadın anasıdır,La nécessité est mère d'invention,La necessità aguzza l'ingegno,A szükség nagy úr,الحاجة أم الاختراع,Al-haja umm al-ikhtira
+178,HARD,PHRASE,Experience is the best teacher,Tecrübe en iyi öğretmendir,L'expérience est le meilleur maître,L'esperienza è la miglior maestra,A tapasztalat a legjobb tanár,التجربة خير برهان,Al-tajriba khayr burhan
+179,HARD,PHRASE,A friend in need is a friend indeed,Dost kara günde belli olur,C'est dans le besoin qu'on reconnaît ses amis,Chi trova un amico trova un tesoro,Bajban ismerszik meg a barát,الصديق وقت الضيق,Al-sadiq waqt al-diq
+180,HARD,PHRASE,Still waters run deep,Durgun sular derin olur,Il n'est pire eau que l'eau qui dort,L'acqua cheta rovina i ponti,Lassú víz partot mos,تحت السواهي دواهي,Tahta al-sawahi dawahi
