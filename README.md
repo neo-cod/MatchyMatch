@@ -1,54 +1,179 @@
 # MatchyMatch — Multi-Language Vocabulary Matching Game
 
-**MatchyMatch** is a self-contained desktop vocabulary and phrase matching game built in **pure Java (Swing, AWT, and `Graphics2D`)** with zero external library dependencies. Designed with clean Object-Oriented Programming (OOP) principles, Java Collections (`ArrayList`, `HashMap`), File I/O (`BufferedReader`, `BufferedWriter`), and a smooth 60 FPS custom-rendered gameplay canvas, it compiles and runs out-of-the-box in **IntelliJ IDEA** or from the terminal.
+**MatchyMatch** is a self-contained, object-oriented desktop and console vocabulary matching game built in **Java 17** using **Maven**, **Java Swing / AWT (`Graphics2D`)**, and **JUnit 5**. Designed for university-level Object-Oriented Programming (**Programming 2**), it combines a clean **Model–View–Controller (MVC)** and **Strategy Pattern** architecture with a 60 FPS custom-rendered Swing GUI and an interactive command-line interface (`--console`).
 
 ---
 
-## Key Features
+## Author & Contributors
 
-* **6 Supported Languages:** Practice vocabulary across **English**, **Turkish**, **French**, **Italian**, **Hungarian**, and **Arabic**.
-  * Choose your known **App Language** inside the **Settings** dialog (top-right gear button) and cycle through your **Target Language to Learn** directly on the Main Menu.
-* **Dual Arabic Alphabet Rule:** Whenever **Arabic** is selected (as either the App Language or Target Language), choose between two display modes on the Main Menu:
-  * **Arabic Script:** Native Arabic script (e.g., `مرحبا`, `شكرا لك`).
-  * **Latin Alphabet:** Romanized phonetic transcription (e.g., `Marhaba`, `Shukran lak`).
-* **Word & Phrase Modes Across 3 Difficulty Levels:**
-  * **Modes:** `Word` (single vocabulary words) and `Phrase` (everyday expressions, questions, and idioms).
-  * **Difficulties:** `Easy`, `Medium`, and `Hard` — backed by 6 categorized `ArrayList<WordEntry>` collections (`easyWords`, `mediumWords`, `hardWords`, `easyPhrases`, `mediumPhrases`, `hardPhrases`) loaded from `words.csv`.
-* **Session & Gameplay Rules:**
-  * **10 Rounds per Session** with **5 Pairs per Round** (App Language on the left column, shuffled Target Language on the right column).
-  * **Flat `+100 Points` Scoring:** Every correct match awards `+100 points` with a smooth green highlight and rising `+100` animation.
-  * **10 Wrong Count Game-Over Rule:** Each mismatched pair increments `Wrong Count` by `1` (`Wrong Count: -` -> `1` -> ... -> `10`). Reaching **10 wrong attempts** immediately ends the session (`GAME OVER!`).
-* **Persistent Personal Records (`records.txt`):**
-  * Automatically tracks and saves your **Highest Score** and **Fastest Time** per language pair, mode, and difficulty configuration using `HashMap<String, String>` and `BufferedReader` / `BufferedWriter`.
-* **Synthesized Sound Effects (`javax.sound.sampled.Clip`):**
-  * Uses pre-synthesized, reusable PCM audio clips in memory for menu clicks, card selection, correct matches, and wrong attempts—requiring no external `.wav` files.
+- **Developer / Maintainer:** [`neo-cod`](https://github.com/neo-cod)
 
 ---
 
-## Project Architecture (5-Class Breakdown)
+## Implemented Features
 
-| File | Responsibility & Core Java Concepts Used |
-| :--- | :--- |
-| **`Main.java`** | Application entry point (`main` method) and top-level `JFrame` window (`MatchyMatch -- Matching Game`). Uses a `CardLayout` to switch seamlessly between `MenuPanel` and `GamePanel`, runs startup diagnostics, and releases audio resources on window close. |
-| **`WordEntry.java`** | Encapsulated OOP data model representing a single row from `words.csv` (`id`, `difficulty`, `type`, and translations for all 6 languages including `arabicScript` and `arabicLatin`). Uses `private final` fields and public getter methods. |
-| **`DataManager.java`** | Handles all File I/O (`BufferedReader`, `BufferedWriter`, `File`) and in-memory collections. Auto-generates/validates `words.csv`, categorizes entries into 6 `ArrayList<WordEntry>` lists (`easyWords`, `mediumWords`, `hardWords`, `easyPhrases`, `mediumPhrases`, `hardPhrases`), and persists personal records (`records.txt`) via a `HashMap<String, String>`. |
-| **`MenuPanel.java`** | Minimalist Swing Main Menu featuring high-quality `Graphics2D` bicubic scaling for `matchy-logo.png`, custom-painted pool-blue circular **Info (`i`)** and **Settings (gear)** buttons, 3 interactive click-to-cycle selection boxes (`LANGUAGE`, `MODE`, `DIFFICULTY`), the **Arabic Alphabet Rule** radio buttons, and the **Start** button. |
-| **`GamePanel.java`** | Custom-rendered 60 FPS gameplay screen powered by a single `javax.swing.Timer` (16 ms tick) and `Graphics2D` with anti-aliasing and double buffering. Manages the 10-round session loop, `WordBox` animations, `+100` floating score indicators, the 10-mistake `Wrong Count` limit, and the end-of-session summary overlay. |
+1. **6 Supported Languages:** Practice vocabulary between any pair of **English**, **Turkish**, **French**, **Italian**, **Hungarian**, and **Arabic**.
+2. **Dynamic Arabic Alphabet Rule (Strategy Pattern):** Seamlessly switch Arabic display between **Arabic Script (`مرحبا`)** and **Romanized Latin Transliteration (`Marhaba`)** at runtime using `LanguageDisplayStrategy`.
+3. **2 Game Modes & 3 Difficulty Tiers:**
+   - **Modes:** `Word` (single words, modeled by `WordItem`) and `Phrase` (everyday expressions & idioms, modeled by `PhraseItem`).
+   - **Difficulties:** `Easy`, `Medium`, and `Hard` (180 total curated entries across 6 categorized `ArrayList<VocabularyItem>` collections).
+4. **10-Round Gameplay, `+100` Scoring & 10-Mistake Game-Over Rule:**
+   - Each session consists of **10 Rounds** with **5 Pairs per Round** (50 total pairs per session).
+   - Every correct match awards a flat **`+100` points** (`VocabularyItem.getBasePoints()`).
+   - Every wrong match increments **`Wrong Count`** by `1`; reaching **10 wrong attempts** immediately triggers **`GAME OVER!`**.
+5. **60 FPS Custom Swing GUI & Synthesized Audio:**
+   - Pure white (`#FFFFFF`) minimalist theme featuring bicubic-scaled `matchy-logo.png`, pool-blue (`#38BDF8`) circular Info (`i`) and geometric 8-tooth Settings gear icons, click-to-cycle configuration cards, smooth fade/shake animations, and zero-dependency procedural PCM sound effects (`javax.sound.sampled.Clip`).
+6. **Interactive Console UI (`--console`):**
+   - Full `Scanner`-based terminal mode supporting playable matching rounds, language/strategy configuration, `Comparable`-sorted personal record leaderboards, and `Comparator`-sorted vocabulary lists.
+7. **Persistent Personal Records (`records.txt`) & Self-Healing Dataset (`words.csv`):**
+   - Automatically generates `words.csv` if missing or corrupted and persists `Highest Score` and `Fastest Time` per configuration key (e.g., `EN-TR-WORD-EASY`) in `records.txt`.
 
 ---
 
-## How to Run
+## Architecture & Package Structure
 
-### Option 1: Run in IntelliJ IDEA (Recommended)
-1. Open **IntelliJ IDEA** (JDK 17 or newer).
-2. Click **File -> Open...** and select the `MatchyMatch` project folder.
-3. Ensure the project root is marked as the Sources Root (or open `Main.java` directly).
-4. Open `Main.java` and click the green **Run (`▶`)** button next to `public static void main(String[] args)`.
-
-### Option 2: Compile & Run from Terminal
-Open a terminal in the project root directory (`MatchyMatch`) and run:
-
-```bash
-javac -encoding UTF-8 *.java
-java Main
+```text
+MatchyMatch/
+├── pom.xml                                      # Maven build configuration (Java 17, JUnit 5, exec-maven-plugin)
+├── LICENSE                                      # MIT License
+├── README.md                                    # Project documentation
+├── matchy-logo.png                              # Custom game logo rendered on Main Menu
+├── words.csv                                    # 180-entry 6-language vocabulary dataset
+├── records.txt                                  # Persistent personal records (Highest Score & Fastest Time)
+├── docs/
+│   ├── UML_Class_Diagram.md                     # Detailed UML Class Diagram (Mermaid + PNG + relationships)
+│   ├── uml_class_diagram.puml                   # PlantUML source file
+│   ├── uml_class_diagram.png                    # High-resolution rendered UML Class Diagram image
+│   └── User_Stories.md                          # 6 User Stories, Acceptance Criteria, Design Decisions & Limitations
+└── src/
+    ├── main/java/com/matchymatch/
+    │   ├── Main.java                            # Entry point (launches Swing JFrame or ConsoleUI with --console)
+    │   ├── domain/
+    │   │   ├── VocabularyItem.java              # Abstract superclass encapsulating 6-language vocabulary data
+    │   │   ├── WordItem.java                    # Concrete subclass for single-word entries ("Word" mode)
+    │   │   ├── PhraseItem.java                  # Concrete subclass for multi-word expressions ("Phrase" mode)
+    │   │   ├── SessionRecord.java               # Record entity implementing Comparable<SessionRecord>
+    │   │   ├── GameSession.java                 # Composes round items, score, wrongCount, and session state
+    │   │   └── InvalidLanguagePairException.java# Custom checked exception for invalid/identical language pairs
+    │   ├── service/
+    │   │   ├── LanguageDisplayStrategy.java     # Strategy interface for resolving language text
+    │   │   ├── ArabicScriptDisplayStrategy.java # Concrete strategy for native Arabic script (مرحبا)
+    │   │   ├── ArabicLatinDisplayStrategy.java  # Concrete strategy for Latin transliteration (Marhaba)
+    │   │   └── GameController.java              # MVC Controller coordinating sessions, strategies & validation
+    │   ├── persistence/
+    │   │   └── DataManager.java                 # File I/O (BufferedReader/Writer, try-with-resources, Collections)
+    │   └── ui/
+    │       ├── MenuPanel.java                   # Custom Swing Main Menu JPanel
+    │       ├── GamePanel.java                   # 60 FPS Graphics2D gameplay JPanel
+    │       └── ConsoleUI.java                   # Interactive Scanner-based CLI
+    └── test/java/com/matchymatch/
+        └── MatchyMatchTest.java                 # 8 JUnit 5 unit tests covering OOP, Strategy, Sorting & File I/O
 ```
+
+---
+
+## Object-Oriented Design & Applied Design Patterns
+
+1. **Strategy Design Pattern (`com.matchymatch.service.LanguageDisplayStrategy`):**
+   - Defines a common interface (`resolveText(VocabularyItem, String)`) implemented by `ArabicScriptDisplayStrategy` and `ArabicLatinDisplayStrategy`.
+   - `GameController` dynamically switches the active strategy at runtime based on whether the user selects **Arabic Script (`مرحبا`)** or **Latin Alphabet (`Marhaba`)**, keeping UI classes decoupled from script-formatting rules.
+2. **Model–View–Controller (MVC) Pattern:**
+   - **Model (`domain` & `persistence`):** `VocabularyItem`, `WordItem`, `PhraseItem`, `GameSession`, `SessionRecord`, and `DataManager` encapsulate state and file persistence independently of any user interface.
+   - **View (`ui`):** `MenuPanel`, `GamePanel`, and `ConsoleUI` handle presentation and user input.
+   - **Controller (`service.GameController`):** Mediates between Views and the Model, enforcing language pair validation (`InvalidLanguagePairException`), match evaluation, and record sorting.
+
+---
+
+## Technical Requirements Mapping Table
+
+| Prog 2 Rubric Requirement | Implementation in MatchyMatch | Key Methods / Details |
+| :--- | :--- | :--- |
+| **Encapsulation & Validation** | `com.matchymatch.domain.VocabularyItem`<br>`com.matchymatch.domain.SessionRecord` | `private final` fields, controlled getters, and constructor validation throwing `IllegalArgumentException` on invalid IDs or blank strings. |
+| **Inheritance (`extends`)** | `WordItem extends VocabularyItem`<br>`PhraseItem extends VocabularyItem` | Both subclasses inherit the 9 language fields from `VocabularyItem` via `super(...)` and specialize mode behavior. |
+| **Polymorphism & Method Overriding** | `VocabularyItem`, `WordItem`, `PhraseItem`, `DataManager`, `GameSession` | `DataManager` and `GameSession` store `WordItem` and `PhraseItem` instances in polymorphic `ArrayList<VocabularyItem>` lists and invoke overridden `getModeType()`, `getBasePoints()`, and `formatDisplayText(String)`. |
+| **Abstract Class** | `com.matchymatch.domain.VocabularyItem` | Declares abstract methods `getModeType()`, `getBasePoints()`, and `formatDisplayText(String)`. |
+| **Interface & Design Pattern** | `com.matchymatch.service.LanguageDisplayStrategy` | Implemented by `ArabicScriptDisplayStrategy` and `ArabicLatinDisplayStrategy` (**Strategy Pattern**). |
+| **Object Sorting (`Comparable` & `Comparator`)** | `SessionRecord implements Comparable<SessionRecord>`<br>`DataManager.getSortedVocabularyItems(...)` | `SessionRecord.compareTo` sorts records by highest score descending, then fastest time ascending; `DataManager` uses `Comparator<VocabularyItem>` to sort vocabulary alphabetically. |
+| **Custom Checked Exception** | `com.matchymatch.domain.InvalidLanguagePairException` | Extends `java.lang.Exception`; thrown by `GameController.validateLanguagePair(...)` when main and target languages are identical or unsupported, and caught in `MenuPanel` & `ConsoleUI`. |
+| **File I/O (`try-with-resources`)** | `com.matchymatch.persistence.DataManager` | Uses `BufferedReader`, `BufferedWriter`, `FileReader`, and `FileWriter` with `StandardCharsets.UTF_8` inside `try-with-resources` blocks for `words.csv` and `records.txt`. |
+| **Java Collections (`ArrayList`, `HashMap`)** | `com.matchymatch.persistence.DataManager` | 6 categorized `ArrayList<VocabularyItem>` lists (`easyWords`..`hardPhrases`) + `HashMap<String, SessionRecord>` (`recordsMap`). |
+| **JUnit 5 Unit Tests** | `src/test/java/com/matchymatch/MatchyMatchTest.java` | 8 `@Test` methods testing inheritance/polymorphism, constructor validation, Strategy switching, `InvalidLanguagePairException`, `Comparable`, `Comparator`, `+100` scoring / 10-wrong Game Over, and `@TempDir` persistence. |
+
+---
+
+## Prerequisites
+
+- **Java Development Kit (JDK):** Version **17** or newer (compatible with JDK 17–25+)
+- **Apache Maven:** Version **3.8+** (or run directly via IntelliJ IDEA's bundled Maven)
+
+---
+
+## How to Build, Test, and Run
+
+### 1. Compile and Run All JUnit 5 Unit Tests
+```bash
+mvn clean test
+```
+
+### 2. Run the Desktop Swing GUI (Default Mode)
+```bash
+mvn exec:java
+```
+*(Or open the project in **IntelliJ IDEA** and click **Run** on `com.matchymatch.Main`.)*
+
+### 3. Run the Interactive Console UI (`--console` Mode)
+```bash
+mvn exec:java -Dexec.args="--console"
+```
+*(Or run `java -cp target/classes com.matchymatch.Main --console` after compiling.)*
+
+---
+
+## Sample Usage
+
+### A. Desktop Swing GUI Mode
+1. Launch `mvn exec:java`. The `1200x820` **MatchyMatch -- Matching Game** window opens on the Main Menu.
+2. Click the **`LANGUAGE`**, **`MODE`**, and **`DIFFICULTY`** boxes to cycle through options (e.g., `Turkish`, `Word`, `Easy`), and choose **`Arabic Script (مرحبا)`** or **`Latin Alphabet (Marhaba)`** when learning Arabic.
+3. Click the top-right **`i`** button to view the game rules, or the **gear** button to change your known Application Language, toggle sound effects, and inspect your saved `Highest Score` and `Fastest Time`.
+4. Click **`Start`** to play 10 rounds of 5 pairs:
+   - Each correct match awards **`+100` points** with a green fade-out animation.
+   - Reaching **`10` wrong attempts** ends the session immediately with **`GAME OVER!`**.
+
+### B. Interactive Console CLI Mode (`--console`)
+```text
+==============================================================
+          MATCHYMATCH -- VOCABULARY MATCHING GAME             
+               Interactive Console Mode (CLI)                 
+==============================================================
+
+--------------------------------------------------------------
+Current Configuration:
+  App Language : English  ->  Target Language : Turkish
+  Mode         : Word         |   Difficulty      : Easy
+  Arabic Rule  : Arabic Script (مرحبا)
+  Highest Score: -- | Fastest Time: --
+--------------------------------------------------------------
+  [1] Start 10-Round Matching Session
+  [2] Change Languages, Mode, Difficulty & Arabic Rule
+  [3] View Personal Records (Sorted via Comparable)
+  [4] Browse Vocabulary List (Sorted via Comparator)
+  [5] Game Rules & Help
+  [6] Exit
+--------------------------------------------------------------
+Select an option (1-6):
+```
+
+---
+
+## UML Class Diagram & Documentation
+
+![MatchyMatch UML Class Diagram](docs/uml_class_diagram.png)
+
+- **Detailed UML Class Diagram (Mermaid + PlantUML + Relationships):** [`docs/UML_Class_Diagram.md`](docs/UML_Class_Diagram.md)
+- **User Stories, Acceptance Criteria, Design Decisions & Known Limitations:** [`docs/User_Stories.md`](docs/User_Stories.md)
+
+---
+
+## License
+
+This project is licensed under the **MIT License** — see the [`LICENSE`](LICENSE) file for details.
