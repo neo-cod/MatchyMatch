@@ -1,0 +1,235 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #FFFFFF
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam class {
+    BackgroundColor #F8FAFC
+    BorderColor #3B82F6
+    HeaderBackgroundColor #EFF6FF
+    FontColor #0F172A
+}
+
+title MatchyMatch — Object-Oriented Architecture & UML Class Diagram
+
+package "com.matchymatch" {
+    class Main {
+        - {static} MENU_CARD : String
+        - {static} GAME_CARD : String
+        - cardLayout : CardLayout
+        - mainContainer : JPanel
+        - dataManager : DataManager
+        - gameController : GameController
+        - menuPanel : MenuPanel
+        - gamePanel : GamePanel
+        + Main()
+        + showMainMenu() : void
+        + startGameSession(appLang: String, targetLang: String, mode: String, difficulty: String, useArabicLatin: boolean, sfxEnabled: boolean) : void
+        + {static} main(args: String[]) : void
+    }
+}
+
+package "com.matchymatch.domain" {
+    abstract class VocabularyItem {
+        + {static} DEFAULT_MATCH_POINTS : int = 100
+        - id : int
+        - difficulty : String
+        - english : String
+        - turkish : String
+        - french : String
+        - italian : String
+        - hungarian : String
+        - arabicScript : String
+        - arabicLatin : String
+        # VocabularyItem(id: int, difficulty: String, en: String, tr: String, fr: String, it: String, hu: String, arScript: String, arLatin: String)
+        + {abstract} getModeType() : String
+        + {abstract} getBasePoints() : int
+        + {abstract} formatDisplayText(rawText: String) : String
+        + getTextForLanguage(language: String, useArabicLatin: boolean) : String
+        + {static} isSupportedLanguage(language: String) : boolean
+        + {static} getLanguageCode(language: String) : String
+        + getId() : int
+        + getDifficulty() : String
+        + getEnglish() : String
+        + getTurkish() : String
+        + getFrench() : String
+        + getItalian() : String
+        + getHungarian() : String
+        + getArabicScript() : String
+        + getArabicLatin() : String
+    }
+
+    class WordItem extends VocabularyItem {
+        + WordItem(id: int, difficulty: String, en: String, tr: String, fr: String, it: String, hu: String, arScript: String, arLatin: String)
+        + getModeType() : String
+        + getBasePoints() : int
+        + formatDisplayText(rawText: String) : String
+    }
+
+    class PhraseItem extends VocabularyItem {
+        + PhraseItem(id: int, difficulty: String, en: String, tr: String, fr: String, it: String, hu: String, arScript: String, arLatin: String)
+        + getModeType() : String
+        + getBasePoints() : int
+        + formatDisplayText(rawText: String) : String
+    }
+
+    class SessionRecord implements Comparable {
+        - configKey : String
+        - highestScore : int
+        - fastestTimeSeconds : double
+        + SessionRecord(configKey: String, highestScore: int, fastestTimeSeconds: double)
+        + updateWithSessionResult(newScore: int, newTimeSeconds: double, completedAllRounds: boolean) : void
+        + toFileValueString() : String
+        + compareTo(other: SessionRecord) : int
+        + getConfigKey() : String
+        + getHighestScore() : int
+        + getFastestTimeSeconds() : double
+    }
+
+    class GameSession {
+        + {static} TOTAL_ROUNDS : int = 10
+        + {static} PAIRS_PER_ROUND : int = 5
+        + {static} MAX_WRONG_COUNT : int = 10
+        - appLanguage : String
+        - targetLanguage : String
+        - mode : String
+        - difficulty : String
+        - configKey : String
+        - sessionPool : List<VocabularyItem>
+        - currentRoundItems : List<VocabularyItem>
+        - currentRound : int
+        - matchedPairsInRound : int
+        - totalScore : int
+        - wrongCount : int
+        - totalSessionSeconds : double
+        - sessionFinished : boolean
+        - endedByMistakes : boolean
+        + GameSession(appLang: String, targetLang: String, mode: String, difficulty: String, configKey: String, pool: List<VocabularyItem>)
+        + loadRoundItems(roundNumber: int) : void
+        + recordCorrectMatch(matchedItem: VocabularyItem) : void
+        + recordWrongMatch() : void
+        + isCurrentRoundComplete() : boolean
+        + advanceRoundOrComplete() : void
+        + addElapsedSeconds(deltaSeconds: double) : void
+        + setTotalSessionSeconds(totalSessionSeconds: double) : void
+    }
+
+    class InvalidLanguagePairException extends Exception {
+        + InvalidLanguagePairException(message: String)
+        + InvalidLanguagePairException(message: String, cause: Throwable)
+    }
+}
+
+package "com.matchymatch.service" {
+    interface LanguageDisplayStrategy {
+        + resolveText(item: VocabularyItem, language: String) : String
+        + isArabicLatinMode() : boolean
+        + getStrategyName() : String
+    }
+
+    class ArabicScriptDisplayStrategy implements LanguageDisplayStrategy {
+        + resolveText(item: VocabularyItem, language: String) : String
+        + isArabicLatinMode() : boolean
+        + getStrategyName() : String
+    }
+
+    class ArabicLatinDisplayStrategy implements LanguageDisplayStrategy {
+        + resolveText(item: VocabularyItem, language: String) : String
+        + isArabicLatinMode() : boolean
+        + getStrategyName() : String
+    }
+
+    class GameController {
+        - dataManager : DataManager
+        - displayStrategy : LanguageDisplayStrategy
+        - activeSession : GameSession
+        + GameController(dataManager: DataManager)
+        + validateLanguagePair(appLanguage: String, targetLanguage: String) : void
+        + configureDisplayStrategy(appLanguage: String, targetLanguage: String, preferArabicLatin: boolean) : void
+        + resolveDisplayText(item: VocabularyItem, language: String) : String
+        + startNewSession(appLang: String, targetLang: String, mode: String, difficulty: String, preferArabicLatin: boolean) : GameSession
+        + evaluateMatch(leftItemId: int, rightItemId: int) : boolean
+        + saveActiveSessionRecord() : void
+        + getSortedRecords() : List<SessionRecord>
+        + getSortedVocabulary(mode: String, difficulty: String) : List<VocabularyItem>
+    }
+}
+
+package "com.matchymatch.persistence" {
+    class DataManager {
+        - wordsFile : File
+        - recordsFile : File
+        - easyWords : ArrayList<VocabularyItem>
+        - mediumWords : ArrayList<VocabularyItem>
+        - hardWords : ArrayList<VocabularyItem>
+        - easyPhrases : ArrayList<VocabularyItem>
+        - mediumPhrases : ArrayList<VocabularyItem>
+        - hardPhrases : ArrayList<VocabularyItem>
+        - recordsMap : HashMap<String, SessionRecord>
+        + DataManager()
+        + DataManager(wordsFile: File, recordsFile: File)
+        + loadWordsFromFile() : void
+        + isLoadedDataValid() : boolean
+        + getEntriesForSession(mode: String, difficulty: String, requiredCount: int) : ArrayList<VocabularyItem>
+        + getSortedVocabularyItems(mode: String, difficulty: String) : List<VocabularyItem>
+        + updateRecord(configKey: String, newScore: int, newTimeSeconds: double, completedAllRounds: boolean) : void
+        + getSortedRecords() : List<SessionRecord>
+        + {static} buildConfigKey(mainLang: String, targetLang: String, mode: String, difficulty: String) : String
+    }
+}
+
+package "com.matchymatch.ui" {
+    class MenuPanel {
+        - mainFrame : Main
+        - dataManager : DataManager
+        - gameController : GameController
+        - appLangIndex : int
+        - targetLangIndex : int
+        - modeIndex : int
+        - difficultyIndex : int
+        - menuClickClip : Clip
+        + MenuPanel(mainFrame: Main, dataManager: DataManager, gameController: GameController)
+        + playMenuClickSound() : void
+        + closeAudioResources() : void
+    }
+
+    class GamePanel {
+        - mainFrame : Main
+        - dataManager : DataManager
+        - gameController : GameController
+        - sessionWordPool : ArrayList<VocabularyItem>
+        - gameLoopTimer : Timer
+        + GamePanel(mainFrame: Main, dataManager: DataManager, gameController: GameController)
+        + startNewSession(appLang: String, targetLang: String, mode: String, difficulty: String, useArabicLatin: boolean, sfxEnabled: boolean) : void
+        + stopGameLoop() : void
+        + closeAudioResources() : void
+    }
+
+    class ConsoleUI {
+        - gameController : GameController
+        - scanner : Scanner
+        + ConsoleUI(gameController: GameController)
+        + start() : void
+    }
+}
+
+Main "1" *-- "1" DataManager : manages >
+Main "1" *-- "1" GameController : coordinates >
+Main "1" *-- "1" MenuPanel : displays >
+Main "1" *-- "1" GamePanel : displays >
+Main ..> ConsoleUI : launches (--console) >
+
+GameController "1" o-- "1" DataManager : uses >
+GameController "1" o-- "1" LanguageDisplayStrategy : delegates >
+GameController "1" *-- "0..1" GameSession : controls >
+GameController ..> InvalidLanguagePairException : throws >
+
+GameSession "1" o-- "5..50" VocabularyItem : contains >
+DataManager "1" *-- "180" VocabularyItem : loads & caches >
+DataManager "1" *-- "0..*" SessionRecord : persists >
+
+MenuPanel "1" --> "1" GameController : validates & queries >
+GamePanel "1" --> "1" GameController : resolves text >
+ConsoleUI "1" --> "1" GameController : drives CLI session >
+@enduml
