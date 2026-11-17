@@ -112,11 +112,6 @@ public abstract class VocabularyItem {
         return formatDisplayText(rawResult);
     }
 
-    // CSV dosyasına yazarken kullanılan büyük harfli tür kodunu ("WORD" veya "PHRASE") döndürür.
-    public String getType() {
-        return getModeType().toUpperCase(Locale.ROOT);
-    }
-
     // Dilin tam adını "records.txt" dosyasında kullanılan 2 harfli kısa koda (EN, TR, FR, IT, HU, AR) dönüştürür.
     public static String getLanguageCode(String languageName) {
         if (languageName == null) {

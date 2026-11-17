@@ -40,7 +40,7 @@ public class GameSession {
         this.mode = mode;
         this.difficulty = difficulty;
         this.configKey = configKey;
-        this.sessionPool = new ArrayList<>(sessionPool);
+        this.sessionPool = (sessionPool != null) ? new ArrayList<>(sessionPool) : new ArrayList<>();
         this.currentRoundItems = new ArrayList<>();
 
         this.currentRound = 1;
@@ -111,24 +111,11 @@ public class GameSession {
         }
     }
 
-    // Geçen süreyi saniye cinsinden toplama ekler.
-    public void addElapsedSeconds(double deltaSeconds) {
-        if (!sessionFinished && deltaSeconds > 0.0) {
-            this.totalSessionSeconds += deltaSeconds;
-        }
-    }
-
     // Oturumun toplam süresini saniye cinsinden günceller.
     public void setTotalSessionSeconds(double totalSessionSeconds) {
         if (totalSessionSeconds >= 0.0) {
             this.totalSessionSeconds = totalSessionSeconds;
         }
-    }
-
-    // Oturumu dışarıdan sonlandırmak için kullanılan yardımcı metot.
-    public void markFinished(boolean failedByMistakes) {
-        this.sessionFinished = true;
-        this.endedByMistakes = failedByMistakes;
     }
 
     // Standart Getter metotları

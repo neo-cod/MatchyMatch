@@ -82,6 +82,9 @@ public class GameController {
 
     // Aktif stratejiyi kullanarak bir VocabularyItem nesnesinin istenen dildeki metnini döndürür.
     public String resolveDisplayText(VocabularyItem item, String language) {
+        if (item == null || displayStrategy == null) {
+            return "";
+        }
         return displayStrategy.resolveText(item, language);
     }
 

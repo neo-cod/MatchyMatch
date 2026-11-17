@@ -112,7 +112,6 @@ classDiagram
         +recordWrongMatch() void
         +isCurrentRoundComplete() boolean
         +advanceRoundOrComplete() void
-        +addElapsedSeconds(double) void
         +setTotalSessionSeconds(double) void
     }
 
@@ -128,19 +127,16 @@ classDiagram
     class LanguageDisplayStrategy {
         <<interface>>
         +resolveText(VocabularyItem, String) String
-        +isArabicLatinMode() boolean
         +getStrategyName() String
     }
 
     class ArabicScriptDisplayStrategy {
         +resolveText(VocabularyItem, String) String
-        +isArabicLatinMode() boolean
         +getStrategyName() String
     }
 
     class ArabicLatinDisplayStrategy {
         +resolveText(VocabularyItem, String) String
-        +isArabicLatinMode() boolean
         +getStrategyName() String
     }
 

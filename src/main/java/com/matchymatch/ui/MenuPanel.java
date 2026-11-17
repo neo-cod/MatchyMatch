@@ -505,7 +505,7 @@ public class MenuPanel extends JPanel {
         startButton.setFont(new Font("SansSerif", Font.BOLD, 28));
         startButton.setBackground(new Color(37, 99, 235));
         startButton.setForeground(Color.WHITE);
-        startButton.setOpaque(true);
+        startButton.setOpaque(false);
         startButton.setContentAreaFilled(false);
         startButton.setBorderPainted(false);
         startButton.setFocusPainted(false);
@@ -774,7 +774,7 @@ public class MenuPanel extends JPanel {
         saveBtn.setFont(new Font("SansSerif", Font.BOLD, 14));
         saveBtn.setBackground(new Color(37, 99, 235));
         saveBtn.setForeground(Color.WHITE);
-        saveBtn.setOpaque(true);
+        saveBtn.setOpaque(false);
         saveBtn.setContentAreaFilled(false);
         saveBtn.setBorderPainted(false);
         saveBtn.setFocusPainted(false);

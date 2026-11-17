@@ -111,7 +111,6 @@ package "com.matchymatch.domain" {
         + recordWrongMatch() : void
         + isCurrentRoundComplete() : boolean
         + advanceRoundOrComplete() : void
-        + addElapsedSeconds(deltaSeconds: double) : void
         + setTotalSessionSeconds(totalSessionSeconds: double) : void
     }
 
@@ -124,19 +123,16 @@ package "com.matchymatch.domain" {
 package "com.matchymatch.service" {
     interface LanguageDisplayStrategy {
         + resolveText(item: VocabularyItem, language: String) : String
-        + isArabicLatinMode() : boolean
         + getStrategyName() : String
     }
 
     class ArabicScriptDisplayStrategy implements LanguageDisplayStrategy {
         + resolveText(item: VocabularyItem, language: String) : String
-        + isArabicLatinMode() : boolean
         + getStrategyName() : String
     }
 
     class ArabicLatinDisplayStrategy implements LanguageDisplayStrategy {
         + resolveText(item: VocabularyItem, language: String) : String
-        + isArabicLatinMode() : boolean
         + getStrategyName() : String
     }
 

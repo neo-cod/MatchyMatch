@@ -86,6 +86,11 @@ public class DataManager {
             return;
         }
 
+        File parentDir = wordsFile.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+
         String[] starterRows = getStarterDataset();
         // try-with-resources: Yazma işlemi bittiğinde BufferedWriter kaynağını otomatik ve güvenli şekilde kapatır
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(wordsFile, StandardCharsets.UTF_8))) {
@@ -177,29 +182,8 @@ public class DataManager {
 
     // Yardımcı metot: Polimorfik VocabularyItem nesnesini getModeType() ve getDifficulty() değerlerine göre ilgili ArrayList'e ekler.
     private void addEntryToCategoryList(VocabularyItem item) {
-        String modeType = item.getModeType();
-        String difficulty = item.getDifficulty();
-
-        if ("Phrase".equalsIgnoreCase(modeType)) {
-            if ("EASY".equals(difficulty)) {
-                easyPhrases.add(item);
-            } else if ("MEDIUM".equals(difficulty)) {
-                mediumPhrases.add(item);
-            } else if ("HARD".equals(difficulty)) {
-                hardPhrases.add(item);
-            } else {
-                easyPhrases.add(item);
-            }
-        } else {
-            if ("EASY".equals(difficulty)) {
-                easyWords.add(item);
-            } else if ("MEDIUM".equals(difficulty)) {
-                mediumWords.add(item);
-            } else if ("HARD".equals(difficulty)) {
-                hardWords.add(item);
-            } else {
-                easyWords.add(item);
-            }
+        if (item != null) {
+            getCategoryList(item.getModeType(), item.getDifficulty()).add(item);
         }
     }
 
@@ -287,7 +271,7 @@ public class DataManager {
         }
 
         ArrayList<VocabularyItem> sessionPool = new ArrayList<>();
-        if (sourceList.isEmpty()) {
+        if (sourceList.isEmpty() || count <= 0) {
             return sessionPool;
         }
 
@@ -296,6 +280,7 @@ public class DataManager {
 
         while (sessionPool.size() < count) {
             Collections.shuffle(copy);
+            boolean addedAnyInPass = false;
             for (int c = 0; c < copy.size(); c++) {
                 if (sessionPool.size() >= count) {
                     break;
@@ -313,7 +298,12 @@ public class DataManager {
 
                 if (!duplicateInRound) {
                     sessionPool.add(candidate);
+                    addedAnyInPass = true;
                 }
+            }
+            // Eğer özel bir veri setinde benzersiz kelime sayısı 5'ten azsa sonsuz döngüyü önlemek için doğrudan ekler
+            if (!addedAnyInPass) {
+                sessionPool.add(copy.get(0));
             }
         }
         return sessionPool;
@@ -406,6 +396,10 @@ public class DataManager {
 
     // Bellekteki recordsMap (HashMap) içindeki tüm SessionRecord nesnelerini try-with-resources ve BufferedWriter ile diske yazar.
     public void saveRecordsToFile() {
+        File parentDir = recordsFile.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(recordsFile, StandardCharsets.UTF_8))) {
             writer.write("# MatchyMatch High Scores & Fastest Times (Format: KEY=HIGH_SCORE,FASTEST_SECONDS)");
             writer.newLine();

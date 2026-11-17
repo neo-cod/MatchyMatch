@@ -39,7 +39,6 @@ public class GamePanel extends JPanel {
     // Oyun kuralları ve 60 FPS zamanlayıcı sabitleri
     private static final int TOTAL_ROUNDS = 10;      // Bir oturumdaki toplam tur sayısı
     private static final int PAIRS_PER_ROUND = 5;    // Her turdaki eşleştirilecek kelime çifti sayısı
-    private static final int MATCH_POINTS = 100;     // Her doğru eşleşmede kazanılan sabit puan
     private static final int MAX_WRONG_COUNT = 10;   // Oyun bitişine (Game Over) sebep olan maksimum hata sayısı
     private static final int FPS_INTERVAL_MS = 16;   // ~60 FPS için milisaniye cinsinden yenileme aralığı (1000 / 60 ≈ 16ms)
 
@@ -198,6 +197,12 @@ public class GamePanel extends JPanel {
     // Seçilen menü ayarları ile yeni bir 10 turluk oyun oturumu başlatır.
     public void startNewSession(String appLang, String targetLang, String mode, String difficulty,
                                 boolean useArabicLatin, boolean sfxEnabled) {
+        stopGameLoop();
+        this.hoverBackButton = false;
+        this.hoverPlayAgainButton = false;
+        this.hoverMainMenuButton = false;
+        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
         this.mainLanguage = appLang;
         this.targetLanguage = targetLang;
         this.mode = mode;
@@ -255,6 +260,10 @@ public class GamePanel extends JPanel {
 
         leftBoxes.clear();
         rightBoxes.clear();
+
+        if (sessionWordPool == null || sessionWordPool.isEmpty()) {
+            return;
+        }
 
         int startIndex = (roundNumber - 1) * PAIRS_PER_ROUND;
         ArrayList<VocabularyItem> roundWords = new ArrayList<>();
@@ -373,6 +382,8 @@ public class GamePanel extends JPanel {
         if (backButtonRect.contains(mx, my)) {
             playSoundClip(selectClip);
             stopGameLoop();
+            hoverBackButton = false;
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             mainFrame.showMainMenu();
             return;
         }
@@ -385,6 +396,8 @@ public class GamePanel extends JPanel {
             } else if (mainMenuButtonRect.contains(mx, my)) {
                 playSoundClip(selectClip);
                 stopGameLoop();
+                hoverMainMenuButton = false;
+                setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
                 mainFrame.showMainMenu();
             }
             return;
@@ -470,7 +483,7 @@ public class GamePanel extends JPanel {
 
         if (left.wordId == right.wordId) {
             // ==================== DOĞRU EŞLEŞME (+100 PUAN) ====================
-            int pointsAwarded = (left.item != null) ? left.item.getBasePoints() : MATCH_POINTS;
+            int pointsAwarded = (left.item != null) ? left.item.getBasePoints() : VocabularyItem.DEFAULT_MATCH_POINTS;
             totalScore += pointsAwarded;
 
             left.triggerCorrectMatch();

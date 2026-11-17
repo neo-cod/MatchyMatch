@@ -51,6 +51,9 @@ public class ConsoleUI {
                 break;
             }
             String choice = scanner.nextLine().trim();
+            if (choice.isEmpty()) {
+                continue;
+            }
 
             if ("1".equals(choice)) {
                 playConsoleSession();
@@ -113,11 +116,16 @@ public class ConsoleUI {
 
         while (!session.isSessionFinished()) {
             List<VocabularyItem> leftItems = session.getCurrentRoundItems();
+            if (leftItems.isEmpty()) {
+                System.out.println("[!] No vocabulary items available for this session.");
+                return;
+            }
             List<VocabularyItem> rightItems = new ArrayList<>(leftItems);
             Collections.shuffle(rightItems);
 
             boolean[] leftMatched = new boolean[leftItems.size()];
             boolean[] rightMatched = new boolean[rightItems.size()];
+            int pairCount = leftItems.size();
 
             while (!session.isCurrentRoundComplete() && !session.isSessionFinished()) {
                 double elapsedSec = (System.currentTimeMillis() - sessionStartMs) / 1000.0;
@@ -134,7 +142,7 @@ public class ConsoleUI {
                 System.out.printf(" %-28s | %-28s%n", "LEFT (" + appLanguage + ")", "RIGHT (" + targetLanguage + ")");
                 System.out.println("--------------------------------------------------------------");
 
-                for (int i = 0; i < leftItems.size(); i++) {
+                for (int i = 0; i < pairCount; i++) {
                     String leftStr = leftMatched[i]
                             ? "[MATCHED]"
                             : gameController.resolveDisplayText(leftItems.get(i), appLanguage);
@@ -145,8 +153,8 @@ public class ConsoleUI {
                 }
                 System.out.println("--------------------------------------------------------------");
 
-                int leftChoice = promptIndex("Select LEFT item (1-5, or 0 to quit): ", 0, 5);
-                if (leftChoice == 0) {
+                int leftChoice = promptIndex("Select LEFT item (1-" + pairCount + ", or 0 to quit): ", 0, pairCount);
+                if (leftChoice <= 0) {
                     System.out.println("Returning to Console Main Menu...");
                     return;
                 }
@@ -155,8 +163,8 @@ public class ConsoleUI {
                     continue;
                 }
 
-                int rightChoice = promptIndex("Select RIGHT item (1-5, or 0 to quit): ", 0, 5);
-                if (rightChoice == 0) {
+                int rightChoice = promptIndex("Select RIGHT item (1-" + pairCount + ", or 0 to quit): ", 0, pairCount);
+                if (rightChoice <= 0) {
                     System.out.println("Returning to Console Main Menu...");
                     return;
                 }
@@ -214,15 +222,21 @@ public class ConsoleUI {
         for (int i = 0; i < LANGUAGES.length; i++) {
             System.out.println("  [" + (i + 1) + "] " + LANGUAGES[i]);
         }
-        int appIdx = promptIndex("Choice (1-" + LANGUAGES.length + "): ", 1, LANGUAGES.length) - 1;
-        String candidateAppLang = LANGUAGES[appIdx];
+        int appChoice = promptIndex("Choice (1-" + LANGUAGES.length + "): ", 1, LANGUAGES.length);
+        if (appChoice < 1) {
+            return;
+        }
+        String candidateAppLang = LANGUAGES[appChoice - 1];
 
         System.out.println("\n--- Select Target Language (Language to Learn) ---");
         for (int i = 0; i < LANGUAGES.length; i++) {
             System.out.println("  [" + (i + 1) + "] " + LANGUAGES[i]);
         }
-        int targetIdx = promptIndex("Choice (1-" + LANGUAGES.length + "): ", 1, LANGUAGES.length) - 1;
-        String candidateTargetLang = LANGUAGES[targetIdx];
+        int targetChoice = promptIndex("Choice (1-" + LANGUAGES.length + "): ", 1, LANGUAGES.length);
+        if (targetChoice < 1) {
+            return;
+        }
+        String candidateTargetLang = LANGUAGES[targetChoice - 1];
 
         // Özel kontrol edilen istisna (InvalidLanguagePairException) ile dil çiftini kontrol eder
         try {
@@ -238,6 +252,9 @@ public class ConsoleUI {
         System.out.println("  [1] Word");
         System.out.println("  [2] Phrase");
         int modeChoice = promptIndex("Choice (1-2): ", 1, 2);
+        if (modeChoice < 1) {
+            return;
+        }
         this.mode = MODES[modeChoice - 1];
 
         System.out.println("\n--- Select Difficulty ---");
@@ -245,12 +262,18 @@ public class ConsoleUI {
         System.out.println("  [2] Medium");
         System.out.println("  [3] Hard");
         int diffChoice = promptIndex("Choice (1-3): ", 1, 3);
+        if (diffChoice < 1) {
+            return;
+        }
         this.difficulty = DIFFICULTIES[diffChoice - 1];
 
         System.out.println("\n--- Select Arabic Alphabet Rule (Strategy Pattern) ---");
         System.out.println("  [1] Arabic Script (مرحبا)");
         System.out.println("  [2] Latin Alphabet (Marhaba)");
         int arabicChoice = promptIndex("Choice (1-2): ", 1, 2);
+        if (arabicChoice < 1) {
+            return;
+        }
         this.preferArabicLatin = (arabicChoice == 2);
         gameController.configureDisplayStrategy(appLanguage, targetLanguage, preferArabicLatin);
 
@@ -306,9 +329,12 @@ public class ConsoleUI {
         while (true) {
             System.out.print(prompt);
             if (!scanner.hasNextLine()) {
-                return min;
+                return -1;
             }
             String line = scanner.nextLine().trim();
+            if (line.isEmpty()) {
+                continue;
+            }
             try {
                 int val = Integer.parseInt(line);
                 if (val >= min && val <= max) {
