@@ -3,12 +3,12 @@ package com.matchymatch.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-// GameSession sınıfı: 10 turluk (her turda 5 kelime çifti) aktif bir oyun oturumunun tüm durumunu
+// GameSession sınıfı: 5 turluk (her turda 5 kelime çifti) aktif bir oyun oturumunun tüm durumunu
 // (mevcut tur, skor, yanlış sayısı, geçen süre ve o tura ait VocabularyItem listesi) kapsülleyen sınıftır.
 // Nesneler arası ilişki (Composition / Aggregation): GameSession nesnesi birden fazla VocabularyItem içerir.
 public class GameSession {
 
-    public static final int TOTAL_ROUNDS = 10;
+    public static final int TOTAL_ROUNDS = 5;
     public static final int PAIRS_PER_ROUND = 5;
     public static final int MAX_WRONG_COUNT = 10;
 
@@ -19,7 +19,7 @@ public class GameSession {
     private final String difficulty;
     private final String configKey;
 
-    // 10 tur x 5 çift = 50 öğelik oturum havuzu ve mevcut turun 5 öğesi (Polymorphic List<VocabularyItem>)
+    // 5 tur x 5 çift = 25 öğelik oturum havuzu ve mevcut turun 5 öğesi (Polymorphic List<VocabularyItem>)
     private final List<VocabularyItem> sessionPool;
     private final List<VocabularyItem> currentRoundItems;
 

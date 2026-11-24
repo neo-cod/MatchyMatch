@@ -6,14 +6,17 @@ import com.matchymatch.ui.ConsoleUI;
 import com.matchymatch.ui.GamePanel;
 import com.matchymatch.ui.MenuPanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 // Main sınıfı: Uygulamanın başlangıç noktası (entry point) ve ana pencere (JFrame) yöneticisidir.
 // 1. Komut satırından "--console" argümanı ile çalıştırıldığında etkileşimli ConsoleUI arayüzünü başlatır.
@@ -47,11 +50,12 @@ public class Main extends JFrame {
         // Başlangıçta tüm dil, mod ve zorluk kombinasyonlarının veri bütünlüğünü otomatik kontrol eder
         DataManager.runDiagnostics(this.dataManager);
 
-        // Pencere boyutunu, minimum boyutunu ve kapatma davranışını ayarlar
+        // Pencere boyutunu, minimum boyutunu, uygulama ikonunu ve kapatma davranışını ayarlar
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(1200, 820));
         setMinimumSize(new Dimension(1060, 760));
         setLocationRelativeTo(null); // Pencereyi ekranın tam ortasında açar
+        loadWindowFavicon();
 
         // Ekranlar arası geçiş için CardLayout ve kapsayıcı JPanel oluşturur
         this.cardLayout = new CardLayout();
@@ -75,6 +79,31 @@ public class Main extends JFrame {
 
         setContentPane(mainContainer);
         showMainMenu();
+    }
+
+    // "mm-fav-icon.png" uygulama ikonunu proje kök dizininden (veya Masaüstünden) yükleyip pencereye atar.
+    private void loadWindowFavicon() {
+        String userHome = System.getProperty("user.home");
+        File[] candidateIcons = new File[]{
+            new File("./mm-fav-icon.png"),
+            new File("mm-fav-icon.png"),
+            new File(userHome + "/Desktop/mm-fav-icon.png"),
+            new File(userHome + "/OneDrive/Desktop/mm-fav-icon.png")
+        };
+
+        for (int i = 0; i < candidateIcons.length; i++) {
+            File iconFile = candidateIcons[i];
+            if (iconFile.exists() && iconFile.isFile()) {
+                try {
+                    Image iconImage = ImageIO.read(iconFile);
+                    if (iconImage != null) {
+                        setIconImage(iconImage);
+                        return;
+                    }
+                } catch (Exception ignored) {
+                }
+            }
+        }
     }
 
     // Aktif ekranı Ana Menü (MenuPanel) olarak değiştirir.

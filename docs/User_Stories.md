@@ -26,7 +26,7 @@ This document outlines the functional user stories, verifiable acceptance criter
 **Acceptance Criteria:**
 - Clicking the `MODE` box cycles between `Word` (represented by [`WordItem`](../src/main/java/com/matchymatch/domain/WordItem.java)) and `Phrase` (represented by [`PhraseItem`](../src/main/java/com/matchymatch/domain/PhraseItem.java)).
 - Clicking the `DIFFICULTY` box cycles through `Easy`, `Medium`, and `Hard`.
-- [`DataManager`](../src/main/java/com/matchymatch/persistence/DataManager.java) loads 180 curated entries from `words.csv` into 6 dedicated polymorphic `ArrayList<VocabularyItem>` lists (35 items per Word difficulty and 25 items per Phrase difficulty) and supplies 50 randomized pairs (10 rounds × 5 pairs) per session.
+- [`DataManager`](../src/main/java/com/matchymatch/persistence/DataManager.java) loads 225 curated entries from `words.csv` into 6 dedicated polymorphic `ArrayList<VocabularyItem>` lists (45 items per Word difficulty and 30 items per Phrase difficulty) and supplies 25 randomized pairs (5 rounds × 5 pairs) per session.
 
 ---
 
@@ -42,16 +42,16 @@ This document outlines the functional user stories, verifiable acceptance criter
 
 ---
 
-### User Story 4: Interactive 10-Round Matching Gameplay with `+100` Scoring & 10-Mistake Game Over
+### User Story 4: Interactive 5-Round Matching Gameplay with `+100` Scoring & 10-Mistake Game Over
 > **As a** player,  
-> **I want to** match 5 pairs per round across 10 rounds, earning `+100` points per correct match while having a strict limit of 10 wrong attempts per session,  
+> **I want to** match 5 pairs per round across 5 rounds, earning `+100` points per correct match while having a strict limit of 10 wrong attempts per session,  
 > **so that** gameplay is rewarding, clear, and challenging.
 
 **Acceptance Criteria:**
-- Each session consists of **10 Rounds** with **5 Pairs per Round** (left column = Application Language, right column = shuffled Target Language).
+- Each session consists of **5 Rounds** with **5 Pairs per Round** (left column = Player Language, right column = shuffled Target Language).
 - Every correct match awards a flat **`+100` points** (`VocabularyItem.getBasePoints()`), plays an ascending confirmation tone, and triggers a green fade-out animation with floating `+100` text in the Swing GUI.
 - Every mismatched pair increments `Wrong Count` by `1`, plays a low error tone, and shakes the cards in red.
-- Reaching **10 wrong attempts (`Wrong Count == 10`)** immediately terminates the session with a **`GAME OVER!`** summary screen.
+- Reaching **10 wrong attempts (`Wrong Count == 10`)** immediately terminates the session with a **`GAME OVER!`** summary screen while still persisting the earned score.
 
 ---
 
@@ -61,8 +61,8 @@ This document outlines the functional user stories, verifiable acceptance criter
 > **so that** I can track my personal progress across sessions.
 
 **Acceptance Criteria:**
-- When a session ends, [`DataManager`](../src/main/java/com/matchymatch/persistence/DataManager.java) updates the [`SessionRecord`](../src/main/java/com/matchymatch/domain/SessionRecord.java) in its `HashMap<String, SessionRecord>` using a normalized key (e.g., `EN-TR-WORD-EASY`) and writes all records to `records.txt` using `try-with-resources` and `BufferedWriter`.
-- `Fastest Time` is recorded or updated only when all 10 rounds are completed (`completedAllRounds == true`).
+- When a session ends (either by completing all 5 rounds or reaching 10 mistakes), [`DataManager`](../src/main/java/com/matchymatch/persistence/DataManager.java) updates the [`SessionRecord`](../src/main/java/com/matchymatch/domain/SessionRecord.java) in its `HashMap<String, SessionRecord>` using a normalized key (e.g., `EN-TR-WORD-EASY`) and writes all records to `records.txt` using `try-with-resources` and `BufferedWriter`.
+- `Fastest Time` is recorded or updated only when all 5 rounds are completed (`completedAllRounds == true`).
 - [`SessionRecord`](../src/main/java/com/matchymatch/domain/SessionRecord.java) implements `Comparable<SessionRecord>`, allowing records to be sorted by highest score descending and fastest completion time ascending.
 
 ---
@@ -103,6 +103,6 @@ This document outlines the functional user stories, verifiable acceptance criter
 1. **Single-Player Local File Persistence (`records.txt`):**
    - Personal records are stored locally in a flat key-value file (`records.txt`) rather than a remote multi-user database. If multiple users play on the same machine, they share the same local high-score table.
 2. **Fixed 6-Language CSV Schema (`words.csv`):**
-   - The starter dataset supports 6 languages (`English`, `Turkish`, `French`, `Italian`, `Hungarian`, `Arabic`) across 180 entries. Adding a 7th language requires extending the CSV header and `VocabularyItem` fields.
+   - The starter dataset supports 6 languages (`English`, `Turkish`, `French`, `Italian`, `Hungarian`, `Arabic`) across 225 entries. Adding a 7th language requires extending the CSV header and `VocabularyItem` fields.
 3. **Synthesized Sound Effects Only:**
    - In-game audio uses procedurally generated 8-bit PCM sine waves rather than external `.wav` or `.mp3` voice recordings, keeping the repository lightweight and self-contained.

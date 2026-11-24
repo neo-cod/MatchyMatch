@@ -189,8 +189,8 @@ public class DataManager {
 
     // Yüklenen 6 listenin yeterli sayıda kelime içerdiğini ve aynı satırda iki farklı dilin birebir aynı metne sahip olmadığını doğrular.
     public final boolean isLoadedDataValid() {
-        if (easyWords.size() < 25 || mediumWords.size() < 25 || hardWords.size() < 25
-                || easyPhrases.size() < 20 || mediumPhrases.size() < 20 || hardPhrases.size() < 20) {
+        if (easyWords.size() < 45 || mediumWords.size() < 45 || hardWords.size() < 45
+                || easyPhrases.size() < 30 || mediumPhrases.size() < 30 || hardPhrases.size() < 30) {
             return false;
         }
 
@@ -413,6 +413,14 @@ public class DataManager {
         }
     }
 
+    // Verilen ayar anahtarı (configKey) için daha önce kaydedilmiş bir oturum kaydı olup olmadığını döndürür.
+    public boolean hasRecord(String configKey) {
+        if (configKey == null) {
+            return false;
+        }
+        return recordsMap.containsKey(configKey.trim().toUpperCase(Locale.ROOT));
+    }
+
     // Verilen ayar anahtarı (configKey) için kaydedilmiş En Yüksek Skoru (Highest Score) döndürür; kayıt yoksa 0 döner.
     public int getHighScore(String configKey) {
         if (configKey == null) {
@@ -466,7 +474,7 @@ public class DataManager {
     }
 
     // Başlangıç doğrulama testi: 6 dil, 2 mod, 3 zorluk ve 2 Arapça kuralı (toplam 360 kombinasyon) için
-    // 10 turluk oturumları simüle ederek boş çeviri veya aynı turda kopya kelime olmadığını doğrular.
+    // 5 turluk oturumları simüle ederek boş çeviri veya aynı turda kopya kelime olmadığını doğrular.
     public static boolean runDiagnostics(DataManager dm) {
         String[] languages = {"English", "Turkish", "French", "Italian", "Hungarian", "Arabic"};
         String[] modes = {"Word", "Phrase"};
@@ -488,12 +496,12 @@ public class DataManager {
                         String diff = difficulties[d];
                         for (int r = 0; r < arabicLatinRules.length; r++) {
                             boolean useArabicLatin = arabicLatinRules[r];
-                            ArrayList<VocabularyItem> pool = dm.getEntriesForSession(mode, diff, 50);
-                            if (pool.size() < 50) {
+                            ArrayList<VocabularyItem> pool = dm.getEntriesForSession(mode, diff, 25);
+                            if (pool.size() < 25) {
                                 throw new IllegalStateException("Insufficient pool for " + mode + " " + diff);
                             }
 
-                            for (int round = 1; round <= 10; round++) {
+                            for (int round = 1; round <= 5; round++) {
                                 ArrayList<Integer> roundIds = new ArrayList<>();
                                 int startIdx = (round - 1) * 5;
                                 for (int i = 0; i < 5; i++) {
@@ -535,7 +543,7 @@ public class DataManager {
         return true;
     }
 
-    // "words.csv" dosyası için 6 dilde (EN, TR, FR, IT, HU, AR_SCRIPT, AR_LATIN) özenle hazırlanmış 180 satırlık başlangıç veri seti.
+    // "words.csv" dosyası için 6 dilde (EN, TR, FR, IT, HU, AR_SCRIPT, AR_LATIN) özenle hazırlanmış 225 satırlık başlangıç veri seti.
     private String[] getStarterDataset() {
         return new String[]{
             // ===================== EASY WORDS (35 Kelime) =====================
@@ -728,7 +736,64 @@ public class DataManager {
             "177,HARD,PHRASE,Necessity is the mother of invention,İhtiyaç icadın anasıdır,La nécessité est mère d'invention,La necessità aguzza l'ingegno,A szükség nagy úr,الحاجة أم الاختراع,Al-haja umm al-ikhtira",
             "178,HARD,PHRASE,Experience is the best teacher,Tecrübe en iyi öğretmendir,L'expérience est le meilleur maître,L'esperienza è la miglior maestra,A tapasztalat a legjobb tanár,التجربة خير برهان,Al-tajriba khayr burhan",
             "179,HARD,PHRASE,A friend in need is a friend indeed,Dost kara günde belli olur,C'est dans le besoin qu'on reconnaît ses amis,Chi trova un amico trova un tesoro,Bajban ismerszik meg a barát,الصديق وقت الضيق,Al-sadiq waqt al-diq",
-            "180,HARD,PHRASE,Still waters run deep,Durgun sular derin olur,Il n'est pire eau que l'eau qui dort,L'acqua cheta rovina i ponti,Lassú víz partot mos,تحت السواهي دواهي,Tahta al-sawahi dawahi"
+            "180,HARD,PHRASE,Still waters run deep,Durgun sular derin olur,Il n'est pire eau que l'eau qui dort,L'acqua cheta rovina i ponti,Lassú víz partot mos,تحت السواهي دواهي,Tahta al-sawahi dawahi",
+
+            // ===================== EK EASY WORDS (+10 Kelime -> Toplam 45) =====================
+            "181,EASY,WORD,Sky,Gökyüzü,Ciel,Cielo,Égbolt,سماء,Samaa",
+            "182,EASY,WORD,Fire,Ateş,Feu,Fuoco,Tűz,نار,Nar",
+            "183,EASY,WORD,Earth,Toprak,Terre,Terra,Föld,أرض,Ard",
+            "184,EASY,WORD,Wind,Rüzgar,Vent,Vento,Szél,رياح,Riyah",
+            "185,EASY,WORD,Table,Masa,Tableau,Tavolo,Asztal,طاولة,Tawila",
+            "186,EASY,WORD,Pen,Kalem,Stylo,Penna,Toll,قلم,Qalam",
+            "187,EASY,WORD,Paper,Kağıt,Papier,Carta,Papír,ورقة,Waraqa",
+            "188,EASY,WORD,Clock,Saat,Horloge,Orologio,Óra,ساعة,Saa",
+            "189,EASY,WORD,Shoe,Ayakkabı,Chaussure,Scarpa,Cipő,حذاء,Hidhaa",
+            "190,EASY,WORD,Shirt,Gömlek,Chemise,Camicia,Ing,قميص,Qamis",
+
+            // ===================== EK EASY PHRASES (+5 İfade -> Toplam 30) =====================
+            "191,EASY,PHRASE,See you soon,Yakında görüşürüz,À bientôt,A presto,Hamarosan találkozunk,أراك قريبا,Araka qariban",
+            "192,EASY,PHRASE,I am hungry,Açım,J'ai faim,Ho fame,Éhes vagyok,أنا جائع,Ana jai",
+            "193,EASY,PHRASE,I am thirsty,Susadım,J'ai soif,Ho sete,Szomjas vagyok,أنا عطشان,Ana atshan",
+            "194,EASY,PHRASE,Open the door,Kapıyı aç,Ouvre la porte,Apri la porta,Nyisd ki az ajtót,افتح الباب,Iftah al-bab",
+            "195,EASY,PHRASE,Close the window,Pencereyi kapat,Ferme la fenêtre,Chiudi la finestra,Csukd be az ablakot,أغلق النافذة,Aghliq al-nafidha",
+
+            // ===================== EK MEDIUM WORDS (+10 Kelime -> Toplam 45) =====================
+            "196,MEDIUM,WORD,Castle,Kale,Château,Castello,Vár,قلعة,Qalaa",
+            "197,MEDIUM,WORD,Harbor,Liman,Port,Porto,Kikötő,ميناء,Minaa",
+            "198,MEDIUM,WORD,Compass,Pusula,Boussole,Bussola,Iránytű,بوصلة,Busala",
+            "199,MEDIUM,WORD,Lantern,Fener,Lanterne,Lanterna,Lámpás,فانوس,Fanus",
+            "200,MEDIUM,WORD,Harvest,Hasat,Récolte,Raccolto,Aratás,حصاد,Hasad",
+            "201,MEDIUM,WORD,Skyline,Ufuk çizgisi,Horizon,Orizzonte,Látóhatár,أفق,Ufuq",
+            "202,MEDIUM,WORD,Shelter,Barınak,Abri,Rifugio,Menedék,مأوى,Mawa",
+            "203,MEDIUM,WORD,Anchor,Çapa,Ancre,Ancora,Horgony,مرساة,Mirsat",
+            "204,MEDIUM,WORD,Thunder,Gök gürültüsü,Tonnerre,Tuono,Mennydörgés,رعد,Raad",
+            "205,MEDIUM,WORD,Fountain,Çeşme,Fontaine,Fontana,Szökőkút,نافورة,Nafura",
+
+            // ===================== EK MEDIUM PHRASES (+5 İfade -> Toplam 30) =====================
+            "206,MEDIUM,PHRASE,I missed the train,Treni kaçırdım,J'ai raté le train,Ho perso il treno,Lekéstem a vonatot,فاتني القطار,Fatani al-qitar",
+            "207,MEDIUM,PHRASE,Where is the exit?,Çıkış nerede?,Où est la sortie?,Dov'è l'uscita?,Hol van a kijárat?,أين المخرج؟,Ayna al-makhraj?",
+            "208,MEDIUM,PHRASE,Keep the change,Üstü kalsın,Gardez la monnaie,Tenga il resto,Tartsa meg a visszajárót,احتفظ بالباقي,Ihtafiz bil-baqi",
+            "209,MEDIUM,PHRASE,Have a great weekend,İyi hafta sonları,Bon week-end,Buon fine settimana,Kellemes hétvégét,عطلة نهاية أسبوع سعيدة,Utlat nihayat usbu saida",
+            "210,MEDIUM,PHRASE,I am learning Arabic,Arapça öğreniyorum,J'apprends l'arabe,Sto imparando l'arabo,Arabul tanulok,أنا أتعلم العربية,Ana ataallam al-arabiyya",
+
+            // ===================== EK HARD WORDS (+10 Kelime -> Toplam 45) =====================
+            "211,HARD,WORD,Diligence,Çalışkanlık,Assiduité,Diligenza,Szorgalom,اجتهاد,Ijtihad",
+            "212,HARD,WORD,Appreciation,Takdir,Gratitude,Gratitudine,Megbecsülés,تقدير,Taqdir",
+            "213,HARD,WORD,Rectitude,Doğruluk,Droiture,Rettitudine,Becsületesség,استقامة,Istiqama",
+            "214,HARD,WORD,Caution,İhtiyat,Prudence,Prudenza,Óvatosság,حذر,Hadhar",
+            "215,HARD,WORD,Mercy,Merhamet,Miséricorde,Misericordia,Irgalom,رحمة,Rahma",
+            "216,HARD,WORD,Solidarity,Dayanışma,Solidarité,Solidarietà,Szolidaritás,تضامن,Tadamun",
+            "217,HARD,WORD,Eternity,Sonsuzluk,Éternité,Eternità,Örökkévalóság,أبدية,Abadiyya",
+            "218,HARD,WORD,Clarity,Berraklık,Clarté,Chiarezza,Tisztaság,وضوح,Wuduh",
+            "219,HARD,WORD,Valor,Yiğitlik,Vaillance,Valore,Vitézség,شهامة,Shahama",
+            "220,HARD,WORD,Serenity,Huzur,Sérénité,Serenità,Derű,سكينة,Sakina",
+
+            // ===================== EK HARD PHRASES (+5 İfade -> Toplam 30) =====================
+            "221,HARD,PHRASE,Time waits for no one,Zaman kimseyi beklemez,Le temps n'attend personne,Il tempo non aspetta nessuno,Az idő nem vár senkire,الوقت لا ينتظر أحدا,Al-waqt la yantazir ahadan",
+            "222,HARD,PHRASE,Hope is the last to die,Umut en son ölür,L'espoir fait vivre,La speranza è l'ultima a morire,A remény hal meg utoljára,الأمل يموت أخيرا,Al-amal yamut akhiran",
+            "223,HARD,PHRASE,Curiosity leads to wisdom,Merak bilgeliğe götürür,La curiosité mène au savoir,La curiosità porta alla saggezza,A kíváncsiság bölcsességhez vezet,الفضول يقود إلى الحكمة,Al-fudul yaqud ila al-hikma",
+            "224,HARD,PHRASE,Think twice before speaking,Konuşmadan önce iki kez düşün,Tourne sept fois ta langue,Pensa due volte prima di parlare,Gondolkodj kétszer mielőtt beszélsz,فكر مرتين قبل أن تتكلم,Fakkir marratayn qabla an tatakallam",
+            "225,HARD,PHRASE,Great oaks from little acorns grow,Damlaya damlaya göl olur,Petit à petit l'oiseau fait son nid,Chi va piano va sano,Sok kicsi sokra megy,معظم النار من مستصغر الشرر,Muazam al-nar min mustasghar al-sharar"
         };
     }
 }

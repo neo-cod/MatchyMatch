@@ -228,7 +228,7 @@ classDiagram
     GameController ..> InvalidLanguagePairException : throws
 
     GameSession "1" o-- "5..50" VocabularyItem : contains
-    DataManager "1" *-- "180" VocabularyItem : loads & caches
+    DataManager "1" *-- "225" VocabularyItem : loads & caches
     DataManager "1" *-- "0..*" SessionRecord : persists
 
     MenuPanel "1" --> "1" GameController : validates
@@ -246,6 +246,6 @@ classDiagram
 | **Inheritance (`extends`)** | `InvalidLanguagePairException` | `java.lang.Exception` | Custom checked exception thrown when the user or caller selects identical or unsupported languages. |
 | **Interface Realization (`implements`)** | `ArabicScriptDisplayStrategy`, `ArabicLatinDisplayStrategy` | `LanguageDisplayStrategy` | Strategy pattern implementations for switching between Arabic script (`مرحبا`) and Romanized Latin script (`Marhaba`) at runtime. |
 | **Interface Realization (`implements`)** | `SessionRecord` | `Comparable<SessionRecord>` | Natural ordering of personal records by highest score descending, then fastest completion time ascending. |
-| **Composition (`*--`)** | `DataManager` | `VocabularyItem` (`1..180`), `SessionRecord` (`0..*`) | `DataManager` owns the 6 categorized `ArrayList<VocabularyItem>` collections and the `HashMap<String, SessionRecord>` map. |
-| **Aggregation (`o--`)** | `GameSession` | `VocabularyItem` (`5..50`) | Each 10-round session aggregates 50 polymorphic `VocabularyItem` instances and exposes 5 items per round. |
+| **Composition (`*--`)** | `DataManager` | `VocabularyItem` (`1..225`), `SessionRecord` (`0..*`) | `DataManager` owns the 6 categorized `ArrayList<VocabularyItem>` collections and the `HashMap<String, SessionRecord>` map. |
+| **Aggregation (`o--`)** | `GameSession` | `VocabularyItem` (`5..25`) | Each 5-round session aggregates 25 polymorphic `VocabularyItem` instances and exposes 5 items per round. |
 | **MVC Association (`-->`)** | `MenuPanel`, `GamePanel`, `ConsoleUI` | `GameController` | All three UI views delegate validation, strategy selection, and session management to `GameController`. |

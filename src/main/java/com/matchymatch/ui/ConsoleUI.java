@@ -85,12 +85,12 @@ public class ConsoleUI {
         String arabicModeText = preferArabicLatin ? "Latin Alphabet (Marhaba)" : "Arabic Script (مرحبا)";
         System.out.println("\n--------------------------------------------------------------");
         System.out.println("Current Configuration:");
-        System.out.println("  App Language : " + appLanguage + "  ->  Target Language : " + targetLanguage);
-        System.out.println("  Mode         : " + mode + "         |   Difficulty      : " + difficulty);
-        System.out.println("  Arabic Rule  : " + arabicModeText);
+        System.out.println("  Player Language : " + appLanguage + "  ->  Target Language : " + targetLanguage);
+        System.out.println("  Mode            : " + mode + "         |   Difficulty      : " + difficulty);
+        System.out.println("  Arabic Rule     : " + arabicModeText);
         System.out.println("  " + gameController.getFormattedRecordSummary(appLanguage, targetLanguage, mode, difficulty));
         System.out.println("--------------------------------------------------------------");
-        System.out.println("  [1] Start 10-Round Matching Session");
+        System.out.println("  [1] Start 5-Round Matching Session");
         System.out.println("  [2] Change Languages, Mode, Difficulty & Arabic Rule");
         System.out.println("  [3] View Personal Records (Sorted via Comparable)");
         System.out.println("  [4] Browse Vocabulary List (Sorted via Comparator)");
@@ -207,7 +207,7 @@ public class ConsoleUI {
             System.out.println("        You reached the maximum of 10 wrong attempts.         ");
         } else {
             System.out.println("                        COMPLETED!                            ");
-            System.out.println("        Congratulations on finishing all 10 rounds!           ");
+            System.out.println("        Congratulations on finishing all 5 rounds!            ");
         }
         System.out.println("  Final Score        : " + session.getTotalScore() + " pts");
         System.out.printf(Locale.US, "  Total Session Time : %.1f sec%n", session.getTotalSessionSeconds());
@@ -218,7 +218,7 @@ public class ConsoleUI {
 
     // Dil, mod, zorluk ve Arapça görünüm stratejisini değiştiren ayarlar alt menüsü.
     private void configureSettingsMenu() {
-        System.out.println("\n--- Select App Language (Known Language) ---");
+        System.out.println("\n--- Select Player Language (Known Language) ---");
         for (int i = 0; i < LANGUAGES.length; i++) {
             System.out.println("  [" + (i + 1) + "] " + LANGUAGES[i]);
         }
@@ -316,7 +316,7 @@ public class ConsoleUI {
 
     private void displayGameRules() {
         System.out.println("\n=========================== HOW TO PLAY MATCHYMATCH ===========================");
-        System.out.println(" 1. Session & Round Structure: 10 Rounds per session, 5 Pairs per round.");
+        System.out.println(" 1. Session & Round Structure: 5 Rounds per session, 5 Pairs per round.");
         System.out.println(" 2. Scoring: Every correct match awards a flat +100 points.");
         System.out.println(" 3. Wrong Count Rule: Every wrong match increases Wrong Count by 1.");
         System.out.println("    Reaching 10 wrong attempts ends the session immediately (GAME OVER!).");

@@ -88,7 +88,7 @@ public class GameController {
         return displayStrategy.resolveText(item, language);
     }
 
-    // Dil çiftini doğrular, stratejiyi ayarlar ve yeni bir 10 turluk GameSession nesnesi oluşturup başlatır.
+    // Dil çiftini doğrular, stratejiyi ayarlar ve yeni bir 5 turluk GameSession nesnesi oluşturup başlatır.
     public GameSession startNewSession(String appLanguage, String targetLanguage,
                                        String mode, String difficulty,
                                        boolean preferArabicLatin) throws InvalidLanguagePairException {
@@ -172,7 +172,8 @@ public class GameController {
         String key = DataManager.buildConfigKey(appLang, targetLang, mode, difficulty);
         int hs = dataManager.getHighScore(key);
         double ft = dataManager.getFastestTime(key);
+        String scoreStr = (dataManager.hasRecord(key) || hs > 0) ? (hs + " pts") : "--";
         String timeStr = (ft > 0.0) ? String.format(Locale.US, "%.1f sec", ft) : "--";
-        return "Highest Score: " + (hs > 0 ? hs + " pts" : "--") + " | Fastest Time: " + timeStr;
+        return "Highest Score: " + scoreStr + " | Fastest Time: " + timeStr;
     }
 }

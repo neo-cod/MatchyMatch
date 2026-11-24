@@ -16,11 +16,11 @@
 2. **Dynamic Arabic Alphabet Rule (Strategy Pattern):** Seamlessly switch Arabic display between **Arabic Script (`مرحبا`)** and **Romanized Latin Transliteration (`Marhaba`)** at runtime using `LanguageDisplayStrategy`.
 3. **2 Game Modes & 3 Difficulty Tiers:**
    - **Modes:** `Word` (single words, modeled by `WordItem`) and `Phrase` (everyday expressions & idioms, modeled by `PhraseItem`).
-   - **Difficulties:** `Easy`, `Medium`, and `Hard` (180 total curated entries across 6 categorized `ArrayList<VocabularyItem>` collections).
-4. **10-Round Gameplay, `+100` Scoring & 10-Mistake Game-Over Rule:**
-   - Each session consists of **10 Rounds** with **5 Pairs per Round** (50 total pairs per session).
+   - **Difficulties:** `Easy`, `Medium`, and `Hard` (225 total curated entries across 6 categorized `ArrayList<VocabularyItem>` collections: 45 Words and 30 Phrases per difficulty).
+4. **5-Round Gameplay, `+100` Scoring & 10-Mistake Game-Over Rule:**
+   - Each session consists of **5 Rounds** with **5 Pairs per Round** (25 total pairs per session).
    - Every correct match awards a flat **`+100` points** (`VocabularyItem.getBasePoints()`).
-   - Every wrong match increments **`Wrong Count`** by `1`; reaching **10 wrong attempts** immediately triggers **`GAME OVER!`**.
+   - Every wrong match increments **`Wrong Count`** by `1`; reaching **10 wrong attempts** immediately triggers **`GAME OVER!`** (while still persisting any earned score to `records.txt`).
 5. **60 FPS Custom Swing GUI & Synthesized Audio:**
    - Pure white (`#FFFFFF`) minimalist theme featuring bicubic-scaled `matchy-logo.png`, pool-blue (`#38BDF8`) circular Info (`i`) and geometric 8-tooth Settings gear icons, click-to-cycle configuration cards, smooth fade/shake animations, and zero-dependency procedural PCM sound effects (`javax.sound.sampled.Clip`).
 6. **Interactive Console UI (`--console`):**
@@ -38,7 +38,8 @@ MatchyMatch/
 ├── LICENSE                                      # MIT License
 ├── README.md                                    # Project documentation
 ├── matchy-logo.png                              # Custom game logo rendered on Main Menu
-├── words.csv                                    # 180-entry 6-language vocabulary dataset
+├── mm-fav-icon.png                              # Application window favicon
+├── words.csv                                    # 225-entry 6-language vocabulary dataset
 ├── records.txt                                  # Persistent personal records (Highest Score & Fastest Time)
 ├── docs/
 │   ├── UML_Class_Diagram.md                     # Detailed UML Class Diagram (Mermaid + PNG + relationships)
@@ -134,10 +135,10 @@ mvn exec:java -Dexec.args="--console"
 ### A. Desktop Swing GUI Mode
 1. Launch `mvn exec:java`. The `1200x820` **MatchyMatch -- Matching Game** window opens on the Main Menu.
 2. Click the **`LANGUAGE`**, **`MODE`**, and **`DIFFICULTY`** boxes to cycle through options (e.g., `Turkish`, `Word`, `Easy`), and choose **`Arabic Script (مرحبا)`** or **`Latin Alphabet (Marhaba)`** when learning Arabic.
-3. Click the top-right **`i`** button to view the game rules, or the **gear** button to change your known Application Language, toggle sound effects, and inspect your saved `Highest Score` and `Fastest Time`.
-4. Click **`Start`** to play 10 rounds of 5 pairs:
+3. Click the top-right **`i`** button to view the game rules, or the **gear** button to change your **Player Language**, toggle **Game Sound Effects**, and inspect your saved `Highest Score` and `Fastest Time`.
+4. Click **`Start`** to play 5 rounds of 5 pairs:
    - Each correct match awards **`+100` points** with a green fade-out animation.
-   - Reaching **`10` wrong attempts** ends the session immediately with **`GAME OVER!`**.
+   - Reaching **`10` wrong attempts** ends the session immediately with **`GAME OVER!`** (and saves your score).
 
 ### B. Interactive Console CLI Mode (`--console`)
 ```text
@@ -148,12 +149,12 @@ mvn exec:java -Dexec.args="--console"
 
 --------------------------------------------------------------
 Current Configuration:
-  App Language : English  ->  Target Language : Turkish
-  Mode         : Word         |   Difficulty      : Easy
-  Arabic Rule  : Arabic Script (مرحبا)
+  Player Language : English  ->  Target Language : Turkish
+  Mode            : Word         |   Difficulty      : Easy
+  Arabic Rule     : Arabic Script (مرحبا)
   Highest Score: -- | Fastest Time: --
 --------------------------------------------------------------
-  [1] Start 10-Round Matching Session
+  [1] Start 5-Round Matching Session
   [2] Change Languages, Mode, Difficulty & Arabic Rule
   [3] View Personal Records (Sorted via Comparable)
   [4] Browse Vocabulary List (Sorted via Comparator)

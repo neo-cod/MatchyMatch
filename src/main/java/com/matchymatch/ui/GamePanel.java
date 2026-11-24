@@ -37,7 +37,7 @@ import java.util.Locale;
 public class GamePanel extends JPanel {
 
     // Oyun kuralları ve 60 FPS zamanlayıcı sabitleri
-    private static final int TOTAL_ROUNDS = 10;      // Bir oturumdaki toplam tur sayısı
+    private static final int TOTAL_ROUNDS = 5;       // Bir oturumdaki toplam tur sayısı
     private static final int PAIRS_PER_ROUND = 5;    // Her turdaki eşleştirilecek kelime çifti sayısı
     private static final int MAX_WRONG_COUNT = 10;   // Oyun bitişine (Game Over) sebep olan maksimum hata sayısı
     private static final int FPS_INTERVAL_MS = 16;   // ~60 FPS için milisaniye cinsinden yenileme aralığı (1000 / 60 ≈ 16ms)
@@ -194,7 +194,7 @@ public class GamePanel extends JPanel {
         }
     }
 
-    // Seçilen menü ayarları ile yeni bir 10 turluk oyun oturumu başlatır.
+    // Seçilen menü ayarları ile yeni bir 5 turluk oyun oturumu başlatır.
     public void startNewSession(String appLang, String targetLang, String mode, String difficulty,
                                 boolean useArabicLatin, boolean sfxEnabled) {
         stopGameLoop();
@@ -231,7 +231,7 @@ public class GamePanel extends JPanel {
 
         this.floatingTexts.clear();
 
-        // DataManager içindeki ilgili kategori listesinden 10 tur x 5 çift = 50 kelimelik karıştırılmış havuzu alır
+        // DataManager içindeki ilgili kategori listesinden 5 tur x 5 çift = 25 kelimelik karıştırılmış havuzu alır
         this.sessionWordPool = dataManager.getEntriesForSession(
                 this.mode, this.difficulty, TOTAL_ROUNDS * PAIRS_PER_ROUND
         );

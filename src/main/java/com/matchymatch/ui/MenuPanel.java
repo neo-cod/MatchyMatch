@@ -81,9 +81,8 @@ public class MenuPanel extends JPanel {
     private final GameController gameController;
 
     // Ayarlar (Settings) penceresinden kontrol edilen durum değişkenleri
-    private int appLangIndex = 0;         // Varsayılan Uygulama Dili (Bilinen Dil): "English"
-    private boolean sfxEnabled = true;    // Ses efektleri (SFX) açık/kapalı durumu
-    private boolean musicEnabled = false; // Oyun müziği açık/kapalı durumu
+    private int appLangIndex = 0;         // Varsayılan Oyuncu Dili (Player Language): "English"
+    private boolean sfxEnabled = true;    // Oyun ses efektleri (Game Sound Effects) açık/kapalı durumu
 
     // Ana ekrandaki 3 tıklanabilir kutunun (LANGUAGE, MODE, DIFFICULTY) aktif indeksleri
     private int targetLangIndex = 1;      // Varsayılan Öğrenilecek Hedef Dil: "Turkish"
@@ -634,13 +633,13 @@ public class MenuPanel extends JPanel {
         return btn;
     }
 
-    // Bilgi ('i') butonuna tıklandığında oyun kurallarını (10 Tur, +100 Puan, 10 Hata Kuralı) gösteren pencereyi açar.
+    // Bilgi ('i') butonuna tıklandığında oyun kurallarını (5 Tur, +100 Puan, 10 Hata Kuralı) gösteren pencereyi açar.
     private void showInfoDialog() {
         String infoHtml = "<html><body style='width: 370px; font-family: SansSerif; font-size: 11pt; color: #1E293B;'>"
                 + "<h2 style='margin-top:0; color:#0284C7;'>How to Play MatchyMatch</h2>"
                 + "<p><b>• Session & Round Structure:</b><br>"
-                + "Each session consists of <b>10 Rounds</b> with <b>5 Pairs per Round</b> "
-                + "(App Language on the left, Target Language on the right). "
+                + "Each session consists of <b>5 Rounds</b> with <b>5 Pairs per Round</b> "
+                + "(Player Language on the left, Target Language on the right). "
                 + "Advance to the next round by matching all 5 pairs.</p>"
                 + "<p><b>• Scoring:</b><br>"
                 + "Every correct match awards a flat <b>+100 points</b>.</p>"
@@ -658,7 +657,7 @@ public class MenuPanel extends JPanel {
     }
 
     // Ayarlar (Settings) butonuna tıklandığında açılan diyalog penceresi:
-    // Uygulama Dili (App Language), Ses Efektleri (SFX), Müzik ve en altta Kişisel Rekorları (Highest Score & Fastest Time) gösterir.
+    // Oyuncu Dili (Player Language), Oyun Ses Efektleri (Game Sound Effects) ve en altta Kişisel Rekorları gösterir.
     private void showSettingsDialog() {
         final JDialog dialog = new JDialog(mainFrame, "Settings", true);
         dialog.setLayout(new BorderLayout(12, 12));
@@ -676,10 +675,10 @@ public class MenuPanel extends JPanel {
         Font labelFont = new Font("SansSerif", Font.BOLD, 14);
         Font controlFont = new Font("SansSerif", Font.PLAIN, 14);
 
-        // 1. Satır: Uygulama Dili (App Language - Bilinen Dil)
+        // 1. Satır: Oyuncu Dili (Player Language)
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JLabel appLangLabel = new JLabel("App Language (Known):");
+        JLabel appLangLabel = new JLabel("Player Language:");
         appLangLabel.setFont(labelFont);
         content.add(appLangLabel, gbc);
 
@@ -689,10 +688,10 @@ public class MenuPanel extends JPanel {
         appLangCombo.setSelectedIndex(appLangIndex);
         content.add(appLangCombo, gbc);
 
-        // 2. Satır: Ses Efektleri (In-Game Sound Effects - SFX)
+        // 2. Satır: Oyun Ses Efektleri (Game Sound Effects)
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JLabel sfxLabel = new JLabel("In-Game Sound Effects (SFX):");
+        JLabel sfxLabel = new JLabel("Game Sound Effects:");
         sfxLabel.setFont(labelFont);
         content.add(sfxLabel, gbc);
 
@@ -702,22 +701,9 @@ public class MenuPanel extends JPanel {
         sfxCheck.setOpaque(false);
         content.add(sfxCheck, gbc);
 
-        // 3. Satır: Oyun Müziği (Game Audio / Music)
+        // 3. Satır: Ayarlar penceresinin en altında Kişisel Rekorlar (Highest Score & Fastest Time) alanı
         gbc.gridx = 0;
         gbc.gridy = 2;
-        JLabel musicLabel = new JLabel("Game Audio / Music:");
-        musicLabel.setFont(labelFont);
-        content.add(musicLabel, gbc);
-
-        gbc.gridx = 1;
-        final JCheckBox musicCheck = new JCheckBox("Enabled", musicEnabled);
-        musicCheck.setFont(controlFont);
-        musicCheck.setOpaque(false);
-        content.add(musicCheck, gbc);
-
-        // 4. Satır: Ayarlar penceresinin en altında Kişisel Rekorlar (Highest Score & Fastest Time) alanı
-        gbc.gridx = 0;
-        gbc.gridy = 3;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(16, 8, 4, 8);
 
@@ -786,7 +772,6 @@ public class MenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 appLangIndex = appLangCombo.getSelectedIndex();
                 sfxEnabled = sfxCheck.isSelected();
-                musicEnabled = musicCheck.isSelected();
                 playMenuClickSound();
 
                 // Eğer seçilen Uygulama Dili ile ana ekrandaki Hedef Dil aynı olduysa, Hedef Dili otomatik değiştirir
@@ -822,7 +807,7 @@ public class MenuPanel extends JPanel {
         int hs = dataManager.getHighScore(configKey);
         double ft = dataManager.getFastestTime(configKey);
 
-        if (hs > 0) {
+        if (dataManager.hasRecord(configKey) || hs > 0) {
             highScoreLabel.setText("Highest Score: " + hs + " pts");
         } else {
             highScoreLabel.setText("Highest Score: --");
@@ -836,7 +821,7 @@ public class MenuPanel extends JPanel {
     }
 
     // "Start" butonuna basıldığında seçilen dil çiftini GameController ile doğrular
-    // ve seçilen dil, mod, zorluk ve Arapça alfabe ayarlarıyla 10 turluk oyunu başlatır.
+    // ve seçilen dil, mod, zorluk ve Arapça alfabe ayarlarıyla 5 turluk oyunu başlatır.
     private void handleStartSession() {
         String appLang = LANGUAGES[appLangIndex];
         String targetLang = LANGUAGES[targetLangIndex];

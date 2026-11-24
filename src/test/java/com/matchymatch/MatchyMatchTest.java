@@ -145,7 +145,7 @@ public class MatchyMatchTest {
         DataManager dm = new DataManager(tempWords, tempRecords);
 
         List<VocabularyItem> sortedEasyWords = dm.getSortedVocabularyItems("Word", "Easy");
-        assertEquals(35, sortedEasyWords.size());
+        assertEquals(45, sortedEasyWords.size());
 
         for (int i = 0; i < sortedEasyWords.size() - 1; i++) {
             String currentEn = sortedEasyWords.get(i).getEnglish();
@@ -165,6 +165,7 @@ public class MatchyMatchTest {
 
         GameSession session = controller.startNewSession("English", "Arabic", "Word", "Easy", true);
         assertNotNull(session);
+        assertEquals(5, GameSession.TOTAL_ROUNDS);
         assertEquals(1, session.getCurrentRound());
         assertEquals(0, session.getTotalScore());
         assertEquals(0, session.getWrongCount());
@@ -187,10 +188,20 @@ public class MatchyMatchTest {
         assertTrue(session.isSessionFinished());
         assertTrue(session.isEndedByMistakes());
         assertFalse(session.isCompletedAllRounds());
+
+        // 10 hata ile biten oyunun skoru da records.txt dosyasına kaydedilmelidir
+        controller.saveActiveSessionRecord();
+        String key = DataManager.buildConfigKey("English", "Arabic", "Word", "Easy");
+        assertTrue(dm.hasRecord(key));
+        assertEquals(100, dm.getHighScore(key));
+
+        DataManager reloaded = new DataManager(tempWords, tempRecords);
+        assertEquals(100, reloaded.getHighScore(key));
+        assertEquals(-1.0, reloaded.getFastestTime(key), 0.01);
     }
 
     // Test 8: Dosya Okuma/Yazma (DataManager File I/O) testi.
-    // Geçici dizinde (@TempDir) 180 kelimenin (her kategoride 30 adet) üretilip okunduğunu
+    // Geçici dizinde (@TempDir) 225 kelimenin (Word: 45'er, Phrase: 30'ar adet) üretilip okunduğunu
     // ve rekorların "records.txt" dosyasına kaydedilip geri yüklendiğini doğrular.
     @Test
     public void testDataManagerPersistenceAndRecordSaving(@TempDir Path tempDir) {
@@ -201,12 +212,12 @@ public class MatchyMatchTest {
         assertTrue(tempWords.exists());
         assertTrue(dm.isLoadedDataValid());
 
-        assertEquals(35, dm.getSortedVocabularyItems("Word", "Easy").size());
-        assertEquals(35, dm.getSortedVocabularyItems("Word", "Medium").size());
-        assertEquals(35, dm.getSortedVocabularyItems("Word", "Hard").size());
-        assertEquals(25, dm.getSortedVocabularyItems("Phrase", "Easy").size());
-        assertEquals(25, dm.getSortedVocabularyItems("Phrase", "Medium").size());
-        assertEquals(25, dm.getSortedVocabularyItems("Phrase", "Hard").size());
+        assertEquals(45, dm.getSortedVocabularyItems("Word", "Easy").size());
+        assertEquals(45, dm.getSortedVocabularyItems("Word", "Medium").size());
+        assertEquals(45, dm.getSortedVocabularyItems("Word", "Hard").size());
+        assertEquals(30, dm.getSortedVocabularyItems("Phrase", "Easy").size());
+        assertEquals(30, dm.getSortedVocabularyItems("Phrase", "Medium").size());
+        assertEquals(30, dm.getSortedVocabularyItems("Phrase", "Hard").size());
 
         String key = DataManager.buildConfigKey("English", "Turkish", "Word", "Easy");
         dm.updateRecord(key, 4800, 41.2, true);
